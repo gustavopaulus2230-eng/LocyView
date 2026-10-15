@@ -1,0 +1,1 @@
+{"name":"locytech-link-bio","version":"1.0.0","private":true,"description":"Demonstração do editor Link na bio para Monitor LocyTech","scripts":{"dev":"node server.mjs"}}

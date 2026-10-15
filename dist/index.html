@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2463eb">
+  <meta name="description" content="Crie páginas de links personalizadas para os clientes da LocyTech. Todos os canais, em um só lugar.">
+  <title>Nova página de links · Monitor LocyTech</title>
+  <link rel="icon" href="./assets/locytech.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 13 4-4M8 16l-1 1a4.25 4.25 0 0 1-6-6l4-4a4.25 4.25 0 0 1 6 0M16 8l1-1a4.25 4.25 0 0 1 6 6l-4 4a4.25 4.25 0 0 1-6 0" transform="translate(1 -1) scale(.92)"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 9 5v9l-9 5-9-5V8l9-5Zm0 9 9-4M12 12 3 8m9 4v10M7.5 5.5l9 5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3v18h17M9 16v-5m5 5V7m5 9V4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="m10 3-.6 2-2 .8-2-.4-2 3.4 1.5 1.5-.2 2.3L3 14l2 3.5 2-.4 2 1 .6 2h4.1l.6-2 2-1 2 .4 2-3.5-1.5-1.4v-2.3l1.5-1.5-2-3.4-2 .4-2-.8-.6-2Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12l4 4v12a2 2 0 0 1-2 2Z"/><path d="M7 3v6h10V3M7 21v-8h10v8"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4m.1 3h.01"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></symbol>
+    <symbol id="i-desktop" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h4"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.8 6.2L21 12l-6.2 2.8L12 21l-2.8-6.2L3 12l6.2-2.8L12 3Z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M21 11A9 9 0 1 0 12 21h1a2 2 0 0 0 1.4-3.4 1.5 1.5 0 0 1 1.1-2.6H18a3 3 0 0 0 3-4Z"/><circle cx="7" cy="10" r=".7"/><circle cx="10" cy="6.5" r=".7"/><circle cx="15" cy="7" r=".7"/></symbol>
+    <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 4h14M12 4v16M8 20h8"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol>
+  </svg>
+
+  <div id="admin-app" class="app-shell">
+    <aside class="sidebar" aria-label="Menu principal">
+      <a class="brand" href="./" aria-label="Monitor LocyTech">
+        <span class="brand-symbol"><img src="./assets/locytech.png" alt=""></span>
+        <span class="brand-word">Locy<span>Tech</span><small>MONITOR</small></span>
+      </a>
+      <div class="workspace"><span class="workspace-icon">L<span></span></span><div>LocyTech<small>Seu espaço de trabalho</small></div><svg class="icon"><use href="#i-chevron"/></svg></div>
+      <p class="nav-label">PRINCIPAL</p>
+      <nav class="navigation">
+        <a class="nav-item" href="#visao-geral" data-section="overview"><svg class="icon"><use href="#i-grid"/></svg>Visão geral</a>
+        <a class="nav-item" href="#clientes" data-section="clients"><svg class="icon"><use href="#i-people"/></svg>Clientes</a>
+        <button id="nav-products" class="nav-item nav-parent"><svg class="icon"><use href="#i-box"/></svg>Produtos<svg class="icon nav-chevron"><use href="#i-chevron"/></svg></button>
+        <a href="#editor" class="nav-subitem selected" aria-current="page"><span></span>Link na bio<span class="new-label">NOVO</span></a>
+        <a class="nav-item" href="#relatorios" data-section="reports"><svg class="icon"><use href="#i-chart"/></svg>Relatórios</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><span class="tip-spark"><svg class="icon"><use href="#i-spark"/></svg></span><strong>Mais conexões.<br>Mais possibilidades.</strong><p>Uma experiência simples para<br>o seu cliente ir mais longe.</p><span class="tip-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+        <button class="nav-item settings-button" data-section="settings"><svg class="icon"><use href="#i-settings"/></svg>Configurações</button>
+        <div class="account"><span class="avatar">LT</span><div><strong>Equipe LocyTech</strong><small>Administrador</small></div><span class="account-more" aria-hidden="true">···</span></div>
+      </div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar"><div class="topbar-label">Monitor <span>/</span> <strong>Produtos</strong></div><div class="topbar-actions"><span class="environment-dot"></span><span class="environment-label">Ambiente de demonstração</span><span class="topbar-divider"></span><button id="help-button" class="icon-button" aria-label="Ajuda"><svg class="icon"><use href="#i-help"/></svg></button></div></header>
+      <main id="editor" class="main-content">
+        <nav class="breadcrumbs" aria-label="Caminho da página"><button id="back-products">Produtos</button><svg class="icon"><use href="#i-chevron"/></svg><span>Link na bio</span><svg class="icon"><use href="#i-chevron"/></svg><strong>Nova página</strong></nav>
+        <section class="page-heading"><div><div class="eyebrow"><span class="heading-symbol"><svg class="icon"><use href="#i-link"/></svg></span> CONECTE SEU CLIENTE AO MUNDO</div><h1>Nova página de links<span class="title-dot">.</span></h1><p>Todos os canais do seu cliente. Um único link.</p></div><div class="heading-actions"><button id="save-draft" class="button button-secondary"><svg class="icon"><use href="#i-save"/></svg>Salvar rascunho</button><button id="publish-page" class="button button-primary">Publicar página<svg class="icon"><use href="#i-arrow"/></svg></button></div></section>
+        <div class="status-row"><span class="draft-pill"><span></span>Rascunho</span><span id="save-status">Suas alterações ainda não foram salvas</span><span class="status-right"><svg class="icon"><use href="#i-check"/></svg>Feito para todos os dispositivos</span></div>
+
+        <div class="editor-layout">
+          <div class="editor-column">
+            <section class="editor-card" aria-label="Configuração da página">
+              <div class="editor-tabs" role="tablist" aria-label="Etapas da criação"><button id="tab-info" data-tab="info" role="tab" aria-selected="true" aria-controls="panel-info"><svg class="icon"><use href="#i-text"/></svg>Informações</button><button id="tab-links" data-tab="links" role="tab" aria-selected="false" aria-controls="panel-links"><svg class="icon"><use href="#i-link"/></svg>Links e atalhos<span id="links-count" class="count-badge">4</span></button><button id="tab-appearance" data-tab="appearance" role="tab" aria-selected="false" aria-controls="panel-appearance"><svg class="icon"><use href="#i-palette"/></svg>Aparência</button></div>
+
+              <div id="panel-info" class="tab-panel" role="tabpanel" aria-labelledby="tab-info">
+                <div class="section-heading"><h2>Vamos começar pelo essencial</h2><p>Apresente a marca e dê um nome à página do seu cliente.</p></div>
+                <label class="field-label">Logo do cliente</label>
+                <div class="logo-upload-area"><div class="upload-logo"><img id="uploaded-logo" src="./assets/locytech.png" alt="Logo atual do cliente"></div><div class="upload-content"><div class="upload-buttons"><label class="button button-small button-secondary upload-label" for="logo-upload"><svg class="icon"><use href="#i-upload"/></svg>Alterar logo</label><button id="remove-logo" class="text-button">Remover</button></div><input id="logo-upload" class="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Enviar logo do cliente"><p>PNG, JPG ou WebP. Até 1,5 MB.<br>Recomendado: imagem quadrada de 400 × 400 px.</p></div></div>
+                <div class="form-grid"><div class="field"><label for="client-name">Cliente <span class="optional-label">uso interno</span></label><input id="client-name" name="client" value="LocyTech" placeholder="Nome do cliente" maxlength="80"></div><div class="field"><label for="page-name">Nome da página <span class="required">*</span></label><input id="page-name" name="name" value="LocyTech" maxlength="60" placeholder="Como a marca se chama?" required></div></div>
+                <div class="field slug-field"><label for="page-slug">Identificador da página <span class="required">*</span></label><div class="input-with-prefix"><span><svg class="icon"><use href="#i-link"/></svg> / </span><input id="page-slug" name="slug" value="locytech" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="50" required aria-describedby="slug-hint"><svg class="icon slug-check"><use href="#i-check"/></svg></div><small id="slug-hint">Escolha um nome simples, sem espaços ou acentos.</small></div>
+                <div class="field description-field"><label for="page-description">Texto de apresentação <span class="optional-label">opcional</span></label><textarea id="page-description" name="description" maxlength="180" rows="3" placeholder="Conte um pouco sobre o seu cliente">Tecnologia que aproxima.
+Encontre tudo o que precisa em um só lugar.</textarea><div class="field-footer"><span>Uma breve descrição para receber quem chega.</span><span id="description-count">82/180</span></div></div>
+                <div class="info-note"><svg class="icon"><use href="#i-info"/></svg><span>Do seu jeito, em tempo real. Cada alteração aparece na prévia ao lado.</span></div>
+              </div>
+
+              <div id="panel-links" class="tab-panel" role="tabpanel" aria-labelledby="tab-links" hidden>
+                <div class="section-heading section-heading-with-action"><div><h2>Os caminhos até o seu cliente</h2><p>Adicione os canais e organize como eles aparecem.</p></div></div>
+                <div class="links-instruction"><svg class="icon"><use href="#i-info"/></svg>Os links abaixo são exemplos. Substitua pelos canais do cliente.</div>
+                <div id="links-list" class="links-list"></div>
+                <button id="add-link" class="add-link-button"><svg class="icon"><use href="#i-plus"/></svg>Adicionar novo link</button>
+                <p class="links-bottom-note">Use as setas para reordenar. Desative um link para ocultá-lo da página.</p>
+              </div>
+
+              <div id="panel-appearance" class="tab-panel" role="tabpanel" aria-labelledby="tab-appearance" hidden>
+                <div class="section-heading"><h2>A personalidade da sua marca</h2><p>Uma página com as cores e o estilo do seu cliente.</p></div>
+                <div class="appearance-section"><h3>Paleta de cores</h3><div class="color-grid"><label class="color-option" for="primary-color"><input id="primary-color" type="color" value="#2463eb"><span>Cor principal<small>Botões e detalhes</small></span></label><label class="color-option" for="accent-color"><input id="accent-color" type="color" value="#f9da57"><span>Cor de destaque<small>Primeiro link</small></span></label><label class="color-option" for="background-color"><input id="background-color" type="color" value="#f2f6ff"><span>Fundo da página<small>Um toque de cor</small></span></label></div></div>
+                <div class="appearance-section"><h3>Formato dos botões</h3><div class="shape-options"><button id="shape-rounded" class="shape-option active" aria-pressed="true"><span class="shape-sample rounded"></span>Arredondados<svg class="icon"><use href="#i-check"/></svg></button><button id="shape-square" class="shape-option" aria-pressed="false"><span class="shape-sample square"></span>Retos<svg class="icon"><use href="#i-check"/></svg></button></div></div>
+                <div class="appearance-section field"><label for="font-choice">Tipografia</label><select id="font-choice"><option value="modern">Moderna · DM Sans</option><option value="classic">Clássica · Georgia</option></select></div>
+                <div class="branding-option"><div><strong>Assinatura LocyTech</strong><p>Mostre quem conecta essa experiência.</p></div><label class="switch"><input id="show-brand" type="checkbox" checked aria-label="Mostrar assinatura LocyTech"><span></span></label></div>
+                <div class="info-note"><svg class="icon"><use href="#i-spark"/></svg><span>Azul para conectar. Amarelo para destacar. A identidade LocyTech já está pronta para você.</span></div>
+              </div>
+            </section>
+            <div class="editor-bottom"><span><svg class="icon"><use href="#i-help"/></svg>Uma boa página começa com as informações certas.</span><button class="text-button next-step" data-go-links>Próximo: links e atalhos<svg class="icon"><use href="#i-arrow"/></svg></button></div>
+          </div>
+
+          <aside class="preview-column" aria-label="Prévia da página do cliente"><div class="preview-heading"><div><h2>Prévia da página</h2><span class="live-label"><i></i>Ao vivo</span></div><div class="device-toggle" aria-label="Dispositivo da prévia"><button id="preview-mobile" class="selected" aria-label="Prévia no celular" aria-pressed="true"><svg class="icon"><use href="#i-mobile"/></svg></button><button id="preview-desktop" aria-label="Prévia no computador" aria-pressed="false"><svg class="icon"><use href="#i-desktop"/></svg></button></div></div>
+            <div class="preview-stage"><span class="stage-orbit orbit-one" aria-hidden="true"></span><span class="stage-orbit orbit-two" aria-hidden="true"></span><span class="stage-spark spark-one" aria-hidden="true">✦</span><span class="stage-spark spark-two" aria-hidden="true">✧</span><div id="device-preview" class="device-preview"><div class="phone-chrome"><span>9:41</span><div class="dynamic-island"></div><div class="phone-indicators"><span>▴▴▴</span><svg viewBox="0 0 18 11" aria-hidden="true"><rect x="1" y="1" width="13" height="9" rx="2"/><path d="M16 4v3"/><rect x="3" y="3" width="9" height="5" fill="currentColor" stroke="none"/></svg></div></div><div id="phone-content" class="phone-content"></div><div class="phone-home"></div></div></div>
+            <div class="preview-tools"><span><svg class="icon"><use href="#i-link"/></svg><span id="slug-preview">locytech</span></span><button id="preview-page" class="icon-button" aria-label="Abrir prévia em uma nova aba" title="Abrir prévia"><svg class="icon"><use href="#i-external"/></svg></button></div>
+            <div class="preview-caption"><span class="preview-caption-icon"><svg class="icon"><use href="#i-spark"/></svg></span><p>Um link na bio.<br><strong>Infinitas possibilidades.</strong></p><span class="active-count"><strong id="active-links-count">4</strong> links ativos</span></div>
+          </aside>
+        </div>
+        <footer class="page-footer"><span>Feito para conectar pessoas e negócios.</span><span>Com a tecnologia <strong>Locy<span>Tech</span></strong></span></footer>
+      </main>
+    </div>
+  </div>
+
+  <main id="public-view" class="public-view" hidden><div class="public-bio" id="public-content"></div></main>
+
+  <dialog id="link-dialog" class="modal"><form id="link-form"><div class="modal-eyebrow"><svg class="icon"><use href="#i-link"/></svg> MAIS UMA CONEXÃO</div><h2>Adicionar novo link</h2><p>Escolha uma plataforma e informe o destino.</p><div class="field"><label for="link-platform">Plataforma</label><select id="link-platform"><option value="whatsapp">WhatsApp</option><option value="website">Site</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="calendar">Agendamento</option><option value="email">E-mail</option><option value="custom">Outro link</option></select></div><div class="field"><label for="link-title">Título do botão</label><input id="link-title" required maxlength="60" placeholder="Ex.: Fale com a gente"></div><div class="field"><label for="link-url">Link de destino</label><input id="link-url" type="text" required placeholder="https://" maxlength="2048"></div><div class="modal-actions"><button id="cancel-link" type="button" class="button button-secondary">Cancelar</button><button type="submit" class="button button-primary"><svg class="icon"><use href="#i-plus"/></svg>Adicionar link</button></div></form></dialog>
+  <dialog id="publish-dialog" class="modal publish-modal"><span class="publish-success"><svg class="icon"><use href="#i-check"/></svg></span><h2>Seu link está pronto!</h2><p>Confira a página e teste os atalhos do seu cliente.</p><label class="field-label" for="published-url">Link desta versão</label><div class="published-url-wrap"><input id="published-url" readonly><button id="copy-published-link" class="icon-button" aria-label="Copiar link da página"><svg class="icon"><use href="#i-copy"/></svg></button></div><div id="published-note" class="publish-note">Versão de demonstração: as informações estão neste link. A integração com o Monitor LocyTech é a próxima etapa.</div><div class="modal-actions"><button id="close-publish" class="button button-secondary">Continuar editando</button><a id="open-published-link" class="button button-primary" target="_blank" rel="noopener">Ver página<svg class="icon"><use href="#i-external"/></svg></a></div></dialog>
+  <dialog id="help-dialog" class="modal"><div class="modal-eyebrow"><svg class="icon"><use href="#i-help"/></svg> CRIAR É SIMPLES</div><h2>Uma página, todos os canais.</h2><p>Personalize as informações da marca, adicione os links do cliente e ajuste a aparência. Você acompanha cada mudança na prévia.</p><ol class="help-steps"><li><strong>Informações</strong><span>Logo, nome e uma apresentação acolhedora.</span></li><li><strong>Links e atalhos</strong><span>WhatsApp, site, LinkedIn ou qualquer outro canal.</span></li><li><strong>Aparência</strong><span>Cores e botões com a identidade do cliente.</span></li></ol><p class="publish-note">Esta demonstração salva rascunhos neste navegador. As páginas geradas são versões de teste. O cadastro integrado, os endereços curtos e a publicação para os clientes precisam ser conectados ao Monitor LocyTech.</p><button id="close-help" class="button button-primary">Entendi, vamos criar<svg class="icon"><use href="#i-arrow"/></svg></button></dialog>
+  <dialog id="section-dialog" class="modal"><div class="modal-eyebrow">MONITOR LOCYTECH</div><h2 id="section-title">Produtos</h2><p id="section-description"></p><div class="module-preview"><svg class="icon"><use href="#i-link"/></svg><div><strong>Link na bio</strong><span>Páginas que conectam todos os canais do cliente.</span></div><span class="draft-pill">Disponível</span></div><button id="close-section" class="button button-primary">Ir para o editor<svg class="icon"><use href="#i-arrow"/></svg></button></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
