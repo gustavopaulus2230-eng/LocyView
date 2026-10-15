@@ -1,35 +1,37 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'locytech-catalog:v2';
+  const STORAGE_KEY = 'locytech-hub:v3';
+  const LEGACY_STORAGE_KEY = 'locytech-catalog:v2';
   const DEFAULT_LOGO = './assets/locytech.png';
   const MAX_LOGO_BYTES = 1.5 * 1024 * 1024;
   const icons = ['window', 'globe', 'store', 'briefcase', 'links'];
-  const platformNames = { whatsapp: 'WhatsApp', instagram: 'Instagram', linkedin: 'LinkedIn', website: 'Site', email: 'E-mail', custom: 'Outro canal' };
+  const platformNames = { instagram: 'Instagram', whatsapp: 'WhatsApp', linkedin: 'LinkedIn' };
+  const socialDefaults = [
+    { platform: 'instagram', title: 'Instagram', description: 'Novidades e inspirações', url: 'https://www.instagram.com/' },
+    { platform: 'whatsapp', title: 'WhatsApp', description: 'Uma conversa começa por aqui', url: 'https://www.whatsapp.com/' },
+    { platform: 'linkedin', title: 'LinkedIn', description: 'Conexões e oportunidades', url: 'https://www.linkedin.com/' }
+  ];
+  const examplePrices = { 'landing page': 'R$ 790,00', 'site institucional': 'R$ 1.490,00', 'loja virtual': 'R$ 2.490,00', 'site para profissionais': 'R$ 1.090,00', 'página de links': 'R$ 290,00' };
   const defaults = {
-    version: 2,
+    version: 3,
     name: 'LocyTech',
-    eyebrow: 'SITES QUE CONECTAM',
-    description: 'Sua marca merece um lugar de destaque na internet.\nEscolha a solução para o seu próximo passo.',
+    eyebrow: 'TECNOLOGIA QUE APROXIMA',
+    description: 'Conecte-se com a gente e encontre a solução certa para o seu negócio.',
     slug: 'locytech',
     logo: DEFAULT_LOGO,
-    primaryColor: '#1453d6',
-    accentColor: '#ffcf24',
-    backgroundColor: '#e9f0fd',
+    primaryColor: '#265dc6',
+    accentColor: '#f1d36a',
+    backgroundColor: '#f6f8fc',
     showBrand: true,
     products: [
-      { id: 'landing-page', icon: 'window', category: 'landing', title: 'Landing page', description: 'Uma página pensada para transformar visitas em oportunidades.', note: 'Campanhas e lançamentos', price: 'Sob consulta', features: ['Layout pensado para o seu objetivo', 'Apresentação da oferta e chamadas para ação', 'Experiência adaptada ao celular', 'Conexão com seus canais de contato'], enabled: true },
-      { id: 'site-institucional', icon: 'globe', category: 'sites', title: 'Site institucional', description: 'A sua empresa na internet, com credibilidade e personalidade.', note: 'Presença digital profissional', price: 'Sob consulta', features: ['Apresentação da empresa e dos serviços', 'Identidade visual da sua marca', 'Navegação adaptada a diferentes telas', 'Canais de contato em destaque'], enabled: true },
-      { id: 'loja-virtual', icon: 'store', category: 'sites', title: 'Loja virtual', description: 'Sua vitrine online, pronta para receber novos clientes.', note: 'Catálogo e vendas online', price: 'Sob consulta', features: ['Catálogo organizado por categorias', 'Apresentação dos produtos', 'Experiência de compra planejada para o negócio', 'Integrações definidas no orçamento'], enabled: true },
-      { id: 'site-profissionais', icon: 'briefcase', category: 'sites', title: 'Site para profissionais', description: 'Mostre seu trabalho e conecte-se com quem precisa de você.', note: 'Portfólio e serviços', price: 'Sob consulta', features: ['Apresentação do seu trabalho', 'Portfólio e descrição dos serviços', 'Página adaptada ao celular', 'Atalhos para os seus canais'], enabled: true },
-      { id: 'pagina-links', icon: 'links', category: 'landing', title: 'Página de links', description: 'Todos os seus canais em uma página simples e personalizada.', note: 'Feita para a bio do Instagram', price: 'Sob consulta', features: ['Logo, cores e textos da marca', 'Atalhos para site e redes sociais', 'Links organizados por prioridade', 'Experiência simples no celular'], enabled: true }
+      { id: 'landing-page', icon: 'window', category: 'landing', title: 'Landing page', description: 'Uma página pensada para transformar visitas em oportunidades.', note: 'Campanhas e lançamentos', price: 'R$ 790,00', features: ['Layout pensado para o seu objetivo', 'Apresentação da oferta e chamadas para ação', 'Experiência adaptada ao celular', 'Conexão com seus canais de contato'], enabled: true },
+      { id: 'site-institucional', icon: 'globe', category: 'sites', title: 'Site institucional', description: 'A sua empresa na internet, com credibilidade e personalidade.', note: 'Presença digital profissional', price: 'R$ 1.490,00', features: ['Apresentação da empresa e dos serviços', 'Identidade visual da sua marca', 'Navegação adaptada a diferentes telas', 'Canais de contato em destaque'], enabled: true },
+      { id: 'loja-virtual', icon: 'store', category: 'sites', title: 'Loja virtual', description: 'Sua vitrine online, pronta para receber novos clientes.', note: 'Catálogo e vendas online', price: 'R$ 2.490,00', features: ['Catálogo organizado por categorias', 'Apresentação dos produtos', 'Experiência de compra planejada para o negócio', 'Integrações definidas no orçamento'], enabled: true },
+      { id: 'site-profissionais', icon: 'briefcase', category: 'sites', title: 'Site para profissionais', description: 'Mostre seu trabalho e conecte-se com quem precisa de você.', note: 'Portfólio e serviços', price: 'R$ 1.090,00', features: ['Apresentação do seu trabalho', 'Portfólio e descrição dos serviços', 'Página adaptada ao celular', 'Atalhos para os seus canais'], enabled: true },
+      { id: 'pagina-links', icon: 'links', category: 'landing', title: 'Página de links', description: 'Todos os seus canais em uma página simples e personalizada.', note: 'Feita para a bio do Instagram', price: 'R$ 290,00', features: ['Logo, cores e textos da marca', 'Atalhos para site e redes sociais', 'Links organizados por prioridade', 'Experiência simples no celular'], enabled: true }
     ],
-    links: [
-      { id: 'whatsapp', platform: 'whatsapp', title: 'WhatsApp', url: '', enabled: true },
-      { id: 'instagram', platform: 'instagram', title: 'Instagram', url: '', enabled: true },
-      { id: 'linkedin', platform: 'linkedin', title: 'LinkedIn', url: '', enabled: true },
-      { id: 'website', platform: 'website', title: 'Nosso site', url: '', enabled: true }
-    ]
+    links: socialDefaults.map(link => ({ id: link.platform, platform: link.platform, title: link.title, url: link.url, enabled: true }))
   };
 
   const $ = (selector, context = document) => context.querySelector(selector);
@@ -42,15 +44,18 @@
 
   function normalize(source) {
     source = source && typeof source === 'object' ? source : {};
-    const previousDefaultPalette = String(source.primaryColor || '').toLowerCase() === '#2471e8'
-      && String(source.accentColor || '').toLowerCase() === '#f4cf54'
-      && String(source.backgroundColor || '').toLowerCase() === '#f2f7fd';
+    const previousDefaultPalette = [
+      ['#2471e8', '#f4cf54', '#f2f7fd'],
+      ['#1453d6', '#ffcf24', '#e9f0fd']
+    ].some(([primary, accent, background]) => String(source.primaryColor || '').toLowerCase() === primary && String(source.accentColor || '').toLowerCase() === accent && String(source.backgroundColor || '').toLowerCase() === background);
     const palette = previousDefaultPalette ? defaults : source;
+    const legacy = source.version !== 3;
+    const previousDescription = 'Sua marca merece um lugar de destaque na internet.\nEscolha a solução para o seu próximo passo.';
     return {
-      version: 2,
+      version: 3,
       name: text(source.name, defaults.name, 60),
-      eyebrow: text(source.eyebrow, defaults.eyebrow, 70),
-      description: text(source.description, defaults.description, 240),
+      eyebrow: legacy && source.eyebrow === 'SITES QUE CONECTAM' ? defaults.eyebrow : text(source.eyebrow, defaults.eyebrow, 70),
+      description: legacy && source.description === previousDescription ? defaults.description : text(source.description, defaults.description, 240),
       slug: text(source.slug, defaults.slug, 50),
       logo: source.logo === '' ? '' : safeLogo(source.logo) || DEFAULT_LOGO,
       primaryColor: color(palette.primaryColor, defaults.primaryColor),
@@ -64,21 +69,22 @@
         title: text(product?.title, 'Nova solução', 70),
         description: text(product?.description, '', 240),
         note: text(product?.note, '', 80),
-        price: text(product?.price, 'Sob consulta', 40) || 'Sob consulta',
+        price: legacy && /^sob consulta$/i.test(String(product?.price || '').trim()) && examplePrices[String(product?.title || '').trim().toLocaleLowerCase('pt-BR')]
+          ? examplePrices[String(product.title).trim().toLocaleLowerCase('pt-BR')]
+          : text(product?.price, 'Sob consulta', 40) || 'Sob consulta',
         features: (Array.isArray(product?.features) ? product.features : []).filter(item => typeof item === 'string').slice(0, 8).map(item => item.slice(0, 130)),
         enabled: product?.enabled !== false
       })),
-      links: (Array.isArray(source.links) ? source.links : defaults.links).slice(0, 20).map(link => ({
-        id: uid(),
-        platform: Object.hasOwn(platformNames, link?.platform) ? link.platform : 'custom',
-        title: text(link?.title, 'Novo canal', 60),
-        url: text(link?.url, '', 2048),
-        enabled: link?.enabled !== false
-      }))
+      links: socialDefaults.map(defaultLink => {
+        const existing = Array.isArray(source.links) ? source.links.find(link => link?.platform === defaultLink.platform) : null;
+        const url = existing ? text(existing.url, '', 2048) : defaultLink.url;
+        return { id: defaultLink.platform, platform: defaultLink.platform, title: defaultLink.title, url: legacy && !url.trim() ? defaultLink.url : url, enabled: true };
+      })
     };
   }
 
   let state = clone(defaults);
+  let currentView = 'hub';
   let activeFilter = 'all';
   let activeEditorTab = 'brand';
   let editingProductId = null;
@@ -111,6 +117,7 @@
       linkedin: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5v7m0-10v.1M11.5 17.5v-7m0 3a3 3 0 0 1 6 0v4"/>',
       email: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/>',
       arrow: '<path d="M5 12h14m-5-5 5 5-5 5"/>',
+      back: '<path d="M19 12H5m5-5-5 5 5 5"/>',
       chevron: '<path d="m9 5 7 7-7 7"/>',
       up: '<path d="m6 14 6-6 6 6"/>',
       down: '<path d="m6 10 6 6 6-6"/>',
@@ -176,53 +183,6 @@
     return button;
   }
 
-  function productBenefits(product) {
-    const labels = product.features.map(feature => {
-      if (feature.length <= 28) return feature;
-      if (/celular|diferentes telas|responsiv/i.test(feature)) return 'Feito para celular';
-      if (/identidade|logo, cores/i.test(feature)) return 'Identidade da marca';
-      if (/oferta|chamadas para a[cç][aã]o|convers[aã]o/i.test(feature)) return 'Foco em conversão';
-      if (/canais|atalhos|contato|redes sociais/i.test(feature)) return 'Canais conectados';
-      if (/cat[aá]logo|categorias/i.test(feature)) return 'Catálogo organizado';
-      if (/portf[oó]lio/i.test(feature)) return 'Portfólio e serviços';
-      if (/apresenta[cç][aã]o dos produtos/i.test(feature)) return 'Produtos em destaque';
-      if (/apresenta[cç][aã]o do seu trabalho/i.test(feature)) return 'Seu trabalho em destaque';
-      if (/apresenta[cç][aã]o da empresa/i.test(feature)) return 'Sua empresa em destaque';
-      if (/layout|objetivo/i.test(feature)) return 'Design sob medida';
-      return '';
-    }).filter(Boolean);
-    return [...new Set(labels)].slice(0, 2);
-  }
-
-  function featureBanner() {
-    const banner = node('section', 'feature-banner');
-    const copy = node('div', 'feature-banner-copy');
-    copy.append(node('p', 'feature-banner-kicker', 'DO PRIMEIRO CLIQUE À PRÓXIMA CONQUISTA'), node('h2', 'feature-banner-title', 'Seu negócio merece ser visto.'), node('p', 'feature-banner-description', 'Landing pages que apresentam sua oferta. Sites que dão força à sua marca.'));
-    const benefits = node('div', 'feature-banner-benefits');
-    ['Design sob medida', 'Feito para celular', 'Canais conectados'].forEach(label => benefits.append(node('span', '', label)));
-    const button = quoteButton('Começar meu projeto', 'feature-banner-button');
-    button.append(symbol('arrow', '', 17));
-    copy.append(benefits, button);
-
-    const art = node('div', 'feature-banner-art');
-    art.setAttribute('aria-hidden', 'true');
-    const window = node('span', 'feature-mini-window');
-    const toolbar = node('span', 'feature-mini-toolbar');
-    toolbar.append(node('i'), node('i'), node('i'));
-    const body = node('span', 'feature-mini-body');
-    const hero = node('span', 'feature-mini-hero');
-    const lines = node('span', 'feature-mini-lines');
-    lines.append(node('i'), node('i'), node('i'));
-    hero.append(symbol('window', 'feature-mini-icon', 27), lines);
-    const tiles = node('span', 'feature-mini-tiles');
-    tiles.append(node('span'), node('span'), node('span'));
-    body.append(hero, tiles);
-    window.append(toolbar, body);
-    art.append(window, symbol('globe', 'feature-art-globe', 29), symbol('spark', 'feature-art-spark', 25));
-    banner.append(copy, art);
-    return banner;
-  }
-
   function productCard(product) {
     const card = node('button', 'product-card');
     card.type = 'button';
@@ -236,55 +196,80 @@
     miniBrowser.append(dots, symbol(product.icon, 'product-art-icon', 29));
     art.append(miniBrowser);
     const copy = node('span', 'product-copy');
-    copy.append(node('span', 'product-category-label', categoryName(product.category)), node('h3', 'product-title', product.title), node('span', 'product-price', product.price), node('p', 'product-description', product.description));
-    const benefits = node('div', 'product-benefits');
-    const benefitLabels = productBenefits(product);
-    benefitLabels.forEach(label => benefits.append(node('span', '', label)));
-    if (benefits.childElementCount) copy.append(benefits);
-    if (product.note && !benefitLabels.some(label => label.trim().toLocaleLowerCase('pt-BR') === product.note.trim().toLocaleLowerCase('pt-BR'))) copy.append(node('span', 'product-note', product.note));
-    const cta = node('span', 'product-card-cta', 'Conhecer solução');
+    copy.append(node('p', 'product-category-label', categoryName(product.category)), node('h2', 'product-title', product.title), node('span', 'product-price', product.price), node('p', 'product-description', product.description));
+    const cta = node('span', 'product-card-cta', 'Ver detalhes');
     cta.append(symbol('arrow', '', 15));
     copy.append(cta);
-    card.append(art, copy, symbol('chevron', 'product-arrow', 18));
+    card.append(art, copy);
     return card;
   }
 
-  function renderPage() {
-    const page = $('#page-content');
-    if (!page) return;
-    applyTheme();
-    page.replaceChildren();
-    if (publicLoadError) {
-      const warning = node('p', 'catalog-empty public-load-error', publicLoadError);
-      warning.setAttribute('role', 'alert');
-      page.append(warning);
-    }
-    const header = node('header', 'profile-header');
+  function hubCardCopy(title, description) {
+    const copy = node('span', 'hub-card-copy');
+    copy.append(node('strong', 'hub-card-title', title), node('span', 'hub-card-description', description));
+    return copy;
+  }
+
+  function renderHub() {
+    const layout = node('div', 'hub-layout');
+    const identity = node('section', 'hub-identity');
     if (state.logo) {
-      const logo = node('img', 'profile-logo');
+      const logo = node('img', 'identity-logo');
       logo.src = safeLogo(state.logo) || DEFAULT_LOGO;
       logo.alt = `Logo ${state.name || 'da marca'}`;
-      logo.width = 104;
-      logo.height = 104;
-      header.append(logo);
-    } else header.append(node('span', 'profile-logo profile-monogram', (state.name.trim().slice(0, 2) || 'LT').toUpperCase()));
-    if (state.eyebrow) header.append(node('p', 'profile-eyebrow', state.eyebrow));
-    header.append(node('h1', 'profile-name', state.name || 'Sua marca'));
-    if (state.description) header.append(node('p', 'profile-description', state.description));
-    const actions = node('div', 'profile-actions');
-    const primary = quoteButton('Solicitar orçamento', 'profile-action-primary');
-    primary.append(symbol('arrow', '', 17));
-    const secondary = node('a', 'profile-action-secondary', 'Fale com a gente');
-    secondary.href = '#contatos';
-    secondary.dataset.scrollContacts = '';
-    actions.append(primary, secondary);
-    header.append(actions);
+      logo.width = 144;
+      logo.height = 144;
+      identity.append(logo);
+    } else identity.append(node('span', 'identity-logo identity-monogram', (state.name.trim().slice(0, 2) || 'LT').toUpperCase()));
+    if (state.eyebrow) identity.append(node('p', 'identity-eyebrow', state.eyebrow));
+    const title = node('h1', 'identity-name', state.name || 'Sua marca');
+    title.id = 'identity-heading';
+    title.tabIndex = -1;
+    identity.append(title);
+    if (state.description) identity.append(node('p', 'identity-description', state.description));
+    const signature = node('div', 'identity-signature');
+    signature.append(node('span', 'signature-dot'), node('span', '', 'Conexões simples. Novas possibilidades.'));
+    identity.append(signature);
 
-    const catalog = node('section', 'catalog-section');
-    const heading = node('div', 'catalog-section-header');
+    const navigation = node('nav', 'hub-navigation');
+    navigation.setAttribute('aria-label', 'Nossos canais');
+    socialDefaults.forEach(social => {
+      const link = state.links.find(item => item.platform === social.platform);
+      const destination = safeUrl(link?.url);
+      const card = node('a', `hub-card hub-card-${social.platform}`);
+      if (destination) { card.href = destination; card.target = '_blank'; card.rel = 'noopener noreferrer'; }
+      else {
+        card.href = location.href;
+        card.dataset.channel = social.platform;
+        card.setAttribute('aria-label', `${social.title}: canal ainda não disponível`);
+      }
+      card.append(symbol(social.platform, 'hub-card-icon', 28), hubCardCopy(social.title, social.description), symbol('arrow', 'hub-card-arrow', 21));
+      navigation.append(card);
+    });
+    const products = node('button', 'hub-card hub-card-products');
+    products.type = 'button';
+    products.dataset.openProducts = '';
+    const copy = hubCardCopy('Nossos produtos', 'Landing pages, sites e soluções digitais');
+    const count = state.products.filter(product => product.enabled).length;
+    copy.append(node('span', 'hub-card-count', `${count} ${count === 1 ? 'solução' : 'soluções'}`));
+    products.append(symbol('store', 'hub-card-icon', 28), copy, symbol('arrow', 'hub-card-arrow', 21));
+    navigation.append(products);
+    layout.append(identity, navigation);
+    return layout;
+  }
+
+  function renderProducts() {
+    const layout = node('div', 'products-layout');
+    const back = node('button', 'back-button');
+    back.type = 'button';
+    back.dataset.backHub = '';
+    back.append(symbol('back', '', 19), node('span', '', 'Voltar aos links'));
+    const header = node('header', 'products-header');
+    const title = node('h1', '', 'Nossos produtos');
+    title.id = 'products-heading';
+    title.tabIndex = -1;
+    header.append(node('p', 'section-eyebrow', 'FEITO PARA O SEU NEGÓCIO'), title, node('p', 'products-description', 'Uma boa ideia merece uma presença digital à altura.'), node('p', 'price-disclaimer', 'Preços ilustrativos para esta demonstração.'));
     const activeProducts = state.products.filter(product => product.enabled);
-    heading.append(symbol('spark', 'section-icon', 18), node('h2', 'catalog-heading', 'Soluções digitais'), node('span', 'catalog-count', String(activeProducts.length).padStart(2, '0')));
-    catalog.append(heading, node('p', 'catalog-subtitle', 'Landing pages e sites feitos para o seu negócio.'));
     const filters = node('div', 'catalog-filters');
     filters.setAttribute('role', 'group');
     filters.setAttribute('aria-label', 'Filtrar soluções');
@@ -302,50 +287,33 @@
     const visible = activeProducts.filter(product => activeFilter === 'all' || product.category === activeFilter);
     visible.forEach(product => grid.append(productCard(product)));
     if (!visible.length) grid.append(node('p', 'catalog-empty', 'Novas soluções estarão disponíveis em breve.'));
-    catalog.append(filters, grid);
+    layout.append(back, header, filters, grid);
+    return layout;
+  }
 
-    const banner = node('section', 'quote-banner');
-    const bannerCopy = node('div', 'quote-banner-copy');
-    bannerCopy.append(node('h2', 'quote-banner-title', 'Sua próxima presença digital começa aqui.'), node('p', 'quote-banner-subtitle', 'Conte a sua ideia. Encontre a solução certa para apresentar sua marca e conectar novos clientes.'));
-    const bannerButton = quoteButton('Vamos conversar', 'quote-banner-button');
-    bannerButton.append(symbol('arrow', '', 17));
-    banner.append(symbol('spark', 'quote-banner-icon', 25), bannerCopy, bannerButton);
-
-    const contacts = node('section', 'channels-section');
-    contacts.id = 'contatos';
-    contacts.append(node('h2', 'channels-heading', 'Vamos conversar?'), node('p', 'channels-subtitle', 'Escolha o seu canal favorito para se conectar.'));
-    const channelGrid = node('div', 'channel-grid');
-    state.links.filter(link => link.enabled).forEach(link => {
-      const destination = safeUrl(link.url);
-      const channel = node(destination ? 'a' : 'button', `channel-card channel-${link.platform}`);
-      if (destination) {
-        channel.href = destination;
-        channel.target = '_blank';
-        channel.rel = 'noopener noreferrer';
-      } else {
-        channel.type = 'button';
-        channel.dataset.channel = link.id;
-        channel.setAttribute('aria-label', `${link.title}: canal ainda não disponível`);
-      }
-      channel.append(symbol(link.platform, 'channel-icon', 20), node('span', 'channel-title', link.title), symbol('chevron', 'channel-arrow', 16));
-      channelGrid.append(channel);
-    });
-    if (!channelGrid.childElementCount) channelGrid.append(node('p', 'channels-empty', 'Prepare uma solicitação de orçamento pelo botão acima.'));
-    contacts.append(channelGrid);
-    page.append(header, featureBanner(), catalog, banner, contacts);
-    if (state.showBrand) {
-      const footer = node('footer', 'site-footer');
-      const mark = node('img', 'footer-logo');
-      mark.src = DEFAULT_LOGO;
-      mark.alt = '';
-      mark.width = 26;
-      mark.height = 26;
-      const brand = node('strong', '', 'Locy');
-      brand.append(node('span', 'footer-brand-accent', 'Tech'));
-      footer.append(mark, node('p', '', 'Tecnologia que aproxima.'), brand);
-      page.append(footer);
+  function renderPage() {
+    const page = $('#page-content');
+    if (!page) return;
+    applyTheme();
+    page.replaceChildren();
+    if (publicLoadError) {
+      const warning = node('p', 'catalog-empty public-load-error', publicLoadError);
+      warning.setAttribute('role', 'alert');
+      page.append(warning);
     }
-    document.title = `${state.name || 'Soluções digitais'} · Sites e landing pages`;
+    $('#site-shell')?.classList.toggle('showing-products', currentView === 'products');
+    if ($('#site-footer')) $('#site-footer').hidden = !state.showBrand;
+    page.append(currentView === 'products' ? renderProducts() : renderHub());
+    document.title = currentView === 'products' ? `Nossos produtos · ${state.name || 'LocyTech'}` : `${state.name || 'LocyTech'} · Conecte-se com a gente`;
+  }
+
+  function switchView(view) {
+    $$('dialog[open]').forEach(dialog => closeDialog(dialog));
+    currentView = view === 'products' ? 'products' : 'hub';
+    if (currentView === 'products') activeFilter = 'all';
+    renderPage();
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    $(currentView === 'products' ? '#products-heading' : '#identity-heading')?.focus({ preventScroll: true });
   }
 
   function openDialog(id, closeOthers = true) {
@@ -448,20 +416,17 @@
     if (!list) return;
     list.replaceChildren();
     state.links.forEach(link => {
-      const card = node('article', `editor-contact${link.enabled ? '' : ' is-disabled'}`);
+      const card = node('article', 'editor-contact');
       card.dataset.contactId = link.id;
       const head = node('div', 'editor-contact-head');
       const title = node('div', 'editor-contact-title');
       title.append(symbol(link.platform, '', 20), node('strong', '', platformNames[link.platform]));
-      const actions = node('div', 'editor-contact-actions');
-      actions.append(actionButton('delete', `Excluir ${link.title}`, 'trash'), toggleInput(link.enabled, `Mostrar ${link.title}`));
-      head.append(title, actions);
+      head.append(title);
       const fields = node('div', 'editor-contact-fields');
-      fields.append(linkField(link, 'title', 'Nome do canal'), linkField(link, 'url', 'Link de destino'));
+      fields.append(linkField(link, 'url', 'Link de destino'));
       card.append(head, fields);
       list.append(card);
     });
-    if (!state.links.length) list.append(node('p', 'editor-empty', 'Adicione um canal para facilitar o contato.'));
   }
 
   function openEditor(tab = activeEditorTab) {
@@ -521,7 +486,7 @@
         });
         content.append(list);
       }
-      content.append(node('p', 'detail-price', product.price), node('p', 'detail-price-note', 'O escopo e o valor são definidos de acordo com o seu projeto.'));
+      content.append(node('p', 'detail-price', product.price), node('p', 'detail-price-note', 'Preço ilustrativo para esta demonstração. O escopo e o valor final são definidos de acordo com o seu projeto.'));
     }
     openDialog('#product-dialog');
   }
@@ -602,7 +567,7 @@
 
   function shareUrl() {
     const snapshot = {
-      version: 2,
+      version: 3,
       name: state.name,
       eyebrow: state.eyebrow,
       description: state.description,
@@ -612,7 +577,7 @@
       backgroundColor: state.backgroundColor,
       showBrand: state.showBrand,
       products: state.products.filter(product => product.enabled).map(({ icon, category, title, description, note, price, features }) => ({ icon, category, title, description, note, price, features })),
-      links: state.links.filter(link => link.enabled).map(({ platform, title, url }) => ({ platform, title, url: safeUrl(url) }))
+      links: socialDefaults.map(social => ({ platform: social.platform, title: social.title, url: safeUrl(state.links.find(link => link.platform === social.platform)?.url) }))
     };
     const url = new URL(location.href);
     url.hash = `p=${encode(snapshot)}`;
@@ -705,12 +670,10 @@
 
   function bindEvents() {
     document.addEventListener('click', event => {
-      const contacts = event.target.closest('[data-scroll-contacts]');
-      if (contacts) {
-        event.preventDefault();
-        $('#contatos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
+      const productsLink = event.target.closest('[data-open-products]');
+      if (productsLink) { event.preventDefault(); switchView('products'); return; }
+      const back = event.target.closest('[data-back-hub]');
+      if (back) { event.preventDefault(); switchView('hub'); return; }
       const quote = event.target.closest('[data-quote]');
       if (quote) { event.preventDefault(); openQuote(quote.dataset.quote); return; }
       const product = event.target.closest('[data-product]');
@@ -724,8 +687,9 @@
       }
       const unavailable = event.target.closest('[data-channel]');
       if (unavailable) {
+        event.preventDefault();
         const content = $('#contact-dialog-content');
-        if (content) content.textContent = 'Este canal ainda não está disponível. Você pode preparar uma solicitação de orçamento.';
+        if (content) content.textContent = 'Este canal ainda não está disponível. Conheça nossos produtos e encontre uma solução para o seu negócio.';
         openDialog('#contact-dialog');
       }
     });
@@ -842,53 +806,12 @@
 
     $('#contact-links-list')?.addEventListener('input', event => {
       const key = event.target.dataset.linkField;
-      if (!['title', 'url'].includes(key)) return;
+      if (key !== 'url') return;
       const card = event.target.closest('[data-contact-id]');
       const link = state.links.find(item => item.id === card?.dataset.contactId);
       if (!link) return;
       link[key] = event.target.value;
       changed();
-    });
-    $('#contact-links-list')?.addEventListener('change', event => {
-      if (event.target.dataset.action !== 'toggle') return;
-      const card = event.target.closest('[data-contact-id]');
-      const link = state.links.find(item => item.id === card?.dataset.contactId);
-      if (!link) return;
-      link.enabled = event.target.checked;
-      card.classList.toggle('is-disabled', !link.enabled);
-      changed();
-    });
-    $('#contact-links-list')?.addEventListener('click', event => {
-      const button = event.target.closest('button[data-action="delete"]');
-      const card = button?.closest('[data-contact-id]');
-      const index = state.links.findIndex(link => link.id === card?.dataset.contactId);
-      if (!button || index < 0) return;
-      state.links.splice(index, 1);
-      renderEditorLinks();
-      changed();
-      toast('Canal removido da página.');
-    });
-    $('#add-contact-link')?.addEventListener('click', () => {
-      if (state.links.length >= 20) { toast('Você pode adicionar até 20 canais.'); return; }
-      $('#contact-link-form')?.reset();
-      $('#contact-url')?.setCustomValidity('');
-      if ($('#contact-title')) $('#contact-title').value = platformNames[$('#contact-platform')?.value] || '';
-      openDialog('#contact-link-dialog');
-    });
-    $('#contact-platform')?.addEventListener('change', event => { if ($('#contact-title')) $('#contact-title').value = platformNames[event.target.value] || ''; });
-    $('#contact-url')?.addEventListener('input', event => event.target.setCustomValidity(''));
-    $('#contact-link-cancel')?.addEventListener('click', () => openEditor('links'));
-    $('#contact-link-form')?.addEventListener('submit', event => {
-      event.preventDefault();
-      const title = $('#contact-title')?.value.trim();
-      const rawUrl = $('#contact-url')?.value.trim() || '';
-      if (!title) { $('#contact-title')?.focus(); toast('Preencha o nome do canal.'); return; }
-      if (rawUrl && !safeUrl(rawUrl)) { $('#contact-url')?.setCustomValidity('Use um endereço com https://, http://, mailto: ou tel:.'); $('#contact-url')?.reportValidity(); return; }
-      const platform = Object.hasOwn(platformNames, $('#contact-platform')?.value) ? $('#contact-platform').value : 'custom';
-      state.links.push({ id: uid(), platform, title: title.slice(0, 60), url: safeUrl(rawUrl), enabled: true });
-      changed();
-      openEditor('links');
-      toast('Canal adicionado.');
     });
 
     $('#quote-close')?.addEventListener('click', () => closeDialog('#quote-dialog'));
@@ -925,13 +848,13 @@
       try { state = decodeSnapshot(location.hash.slice(3)); }
       catch {
         state = clone(defaults);
-        publicLoadError = 'Não foi possível carregar esta versão. Confira se o link foi copiado por completo. Abaixo está o catálogo de demonstração.';
+        publicLoadError = 'Não foi possível carregar esta versão. Confira se o link foi copiado por completo. Abaixo está a página de demonstração.';
         toast('Não foi possível abrir esta versão. Confira se o link foi copiado por completo.');
       }
     }
     if (!publicMode) {
       try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY) || 'null');
         if (saved?.state) { state = normalize(saved.state); savedAt = typeof saved.savedAt === 'string' ? saved.savedAt : null; }
       } catch { /* Editing is available even when storage is disabled. */ }
     }
