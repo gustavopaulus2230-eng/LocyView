@@ -13,9 +13,9 @@
     description: 'Sua marca merece um lugar de destaque na internet.\nEscolha a solução para o seu próximo passo.',
     slug: 'locytech',
     logo: DEFAULT_LOGO,
-    primaryColor: '#2471e8',
-    accentColor: '#f4cf54',
-    backgroundColor: '#f2f7fd',
+    primaryColor: '#1453d6',
+    accentColor: '#ffcf24',
+    backgroundColor: '#e9f0fd',
     showBrand: true,
     products: [
       { id: 'landing-page', icon: 'window', category: 'landing', title: 'Landing page', description: 'Uma página pensada para transformar visitas em oportunidades.', note: 'Campanhas e lançamentos', price: 'Sob consulta', features: ['Layout pensado para o seu objetivo', 'Apresentação da oferta e chamadas para ação', 'Experiência adaptada ao celular', 'Conexão com seus canais de contato'], enabled: true },
@@ -42,6 +42,10 @@
 
   function normalize(source) {
     source = source && typeof source === 'object' ? source : {};
+    const previousDefaultPalette = String(source.primaryColor || '').toLowerCase() === '#2471e8'
+      && String(source.accentColor || '').toLowerCase() === '#f4cf54'
+      && String(source.backgroundColor || '').toLowerCase() === '#f2f7fd';
+    const palette = previousDefaultPalette ? defaults : source;
     return {
       version: 2,
       name: text(source.name, defaults.name, 60),
@@ -49,9 +53,9 @@
       description: text(source.description, defaults.description, 240),
       slug: text(source.slug, defaults.slug, 50),
       logo: source.logo === '' ? '' : safeLogo(source.logo) || DEFAULT_LOGO,
-      primaryColor: color(source.primaryColor, defaults.primaryColor),
-      accentColor: color(source.accentColor, defaults.accentColor),
-      backgroundColor: color(source.backgroundColor, defaults.backgroundColor),
+      primaryColor: color(palette.primaryColor, defaults.primaryColor),
+      accentColor: color(palette.accentColor, defaults.accentColor),
+      backgroundColor: color(palette.backgroundColor, defaults.backgroundColor),
       showBrand: source.showBrand !== false,
       products: (Array.isArray(source.products) ? source.products : defaults.products).slice(0, 30).map(product => ({
         id: uid(),
@@ -172,6 +176,53 @@
     return button;
   }
 
+  function productBenefits(product) {
+    const labels = product.features.map(feature => {
+      if (feature.length <= 28) return feature;
+      if (/celular|diferentes telas|responsiv/i.test(feature)) return 'Feito para celular';
+      if (/identidade|logo, cores/i.test(feature)) return 'Identidade da marca';
+      if (/oferta|chamadas para a[cç][aã]o|convers[aã]o/i.test(feature)) return 'Foco em conversão';
+      if (/canais|atalhos|contato|redes sociais/i.test(feature)) return 'Canais conectados';
+      if (/cat[aá]logo|categorias/i.test(feature)) return 'Catálogo organizado';
+      if (/portf[oó]lio/i.test(feature)) return 'Portfólio e serviços';
+      if (/apresenta[cç][aã]o dos produtos/i.test(feature)) return 'Produtos em destaque';
+      if (/apresenta[cç][aã]o do seu trabalho/i.test(feature)) return 'Seu trabalho em destaque';
+      if (/apresenta[cç][aã]o da empresa/i.test(feature)) return 'Sua empresa em destaque';
+      if (/layout|objetivo/i.test(feature)) return 'Design sob medida';
+      return '';
+    }).filter(Boolean);
+    return [...new Set(labels)].slice(0, 2);
+  }
+
+  function featureBanner() {
+    const banner = node('section', 'feature-banner');
+    const copy = node('div', 'feature-banner-copy');
+    copy.append(node('p', 'feature-banner-kicker', 'DO PRIMEIRO CLIQUE À PRÓXIMA CONQUISTA'), node('h2', 'feature-banner-title', 'Seu negócio merece ser visto.'), node('p', 'feature-banner-description', 'Landing pages que apresentam sua oferta. Sites que dão força à sua marca.'));
+    const benefits = node('div', 'feature-banner-benefits');
+    ['Design sob medida', 'Feito para celular', 'Canais conectados'].forEach(label => benefits.append(node('span', '', label)));
+    const button = quoteButton('Começar meu projeto', 'feature-banner-button');
+    button.append(symbol('arrow', '', 17));
+    copy.append(benefits, button);
+
+    const art = node('div', 'feature-banner-art');
+    art.setAttribute('aria-hidden', 'true');
+    const window = node('span', 'feature-mini-window');
+    const toolbar = node('span', 'feature-mini-toolbar');
+    toolbar.append(node('i'), node('i'), node('i'));
+    const body = node('span', 'feature-mini-body');
+    const hero = node('span', 'feature-mini-hero');
+    const lines = node('span', 'feature-mini-lines');
+    lines.append(node('i'), node('i'), node('i'));
+    hero.append(symbol('window', 'feature-mini-icon', 27), lines);
+    const tiles = node('span', 'feature-mini-tiles');
+    tiles.append(node('span'), node('span'), node('span'));
+    body.append(hero, tiles);
+    window.append(toolbar, body);
+    art.append(window, symbol('globe', 'feature-art-globe', 29), symbol('spark', 'feature-art-spark', 25));
+    banner.append(copy, art);
+    return banner;
+  }
+
   function productCard(product) {
     const card = node('button', 'product-card');
     card.type = 'button';
@@ -185,8 +236,15 @@
     miniBrowser.append(dots, symbol(product.icon, 'product-art-icon', 29));
     art.append(miniBrowser);
     const copy = node('span', 'product-copy');
-    copy.append(node('h3', 'product-title', product.title), node('span', 'product-price', product.price), node('p', 'product-description', product.description));
-    if (product.note) copy.append(node('span', 'product-note', product.note));
+    copy.append(node('span', 'product-category-label', categoryName(product.category)), node('h3', 'product-title', product.title), node('span', 'product-price', product.price), node('p', 'product-description', product.description));
+    const benefits = node('div', 'product-benefits');
+    const benefitLabels = productBenefits(product);
+    benefitLabels.forEach(label => benefits.append(node('span', '', label)));
+    if (benefits.childElementCount) copy.append(benefits);
+    if (product.note && !benefitLabels.some(label => label.trim().toLocaleLowerCase('pt-BR') === product.note.trim().toLocaleLowerCase('pt-BR'))) copy.append(node('span', 'product-note', product.note));
+    const cta = node('span', 'product-card-cta', 'Conhecer solução');
+    cta.append(symbol('arrow', '', 15));
+    copy.append(cta);
     card.append(art, copy, symbol('chevron', 'product-arrow', 18));
     return card;
   }
@@ -248,8 +306,8 @@
 
     const banner = node('section', 'quote-banner');
     const bannerCopy = node('div', 'quote-banner-copy');
-    bannerCopy.append(node('h2', 'quote-banner-title', 'Sua ideia merece sair do papel.'), node('p', 'quote-banner-subtitle', 'Conte o que você precisa. Vamos encontrar o melhor caminho.'));
-    const bannerButton = quoteButton('Vamos criar juntos', 'quote-banner-button');
+    bannerCopy.append(node('h2', 'quote-banner-title', 'Sua próxima presença digital começa aqui.'), node('p', 'quote-banner-subtitle', 'Conte a sua ideia. Encontre a solução certa para apresentar sua marca e conectar novos clientes.'));
+    const bannerButton = quoteButton('Vamos conversar', 'quote-banner-button');
     bannerButton.append(symbol('arrow', '', 17));
     banner.append(symbol('spark', 'quote-banner-icon', 25), bannerCopy, bannerButton);
 
@@ -274,7 +332,7 @@
     });
     if (!channelGrid.childElementCount) channelGrid.append(node('p', 'channels-empty', 'Prepare uma solicitação de orçamento pelo botão acima.'));
     contacts.append(channelGrid);
-    page.append(header, catalog, banner, contacts);
+    page.append(header, featureBanner(), catalog, banner, contacts);
     if (state.showBrand) {
       const footer = node('footer', 'site-footer');
       const mark = node('img', 'footer-logo');
@@ -282,7 +340,9 @@
       mark.alt = '';
       mark.width = 26;
       mark.height = 26;
-      footer.append(mark, node('p', '', 'Tecnologia que aproxima.'), node('strong', '', 'LocyTech'));
+      const brand = node('strong', '', 'Locy');
+      brand.append(node('span', 'footer-brand-accent', 'Tech'));
+      footer.append(mark, node('p', '', 'Tecnologia que aproxima.'), brand);
       page.append(footer);
     }
     document.title = `${state.name || 'Soluções digitais'} · Sites e landing pages`;
