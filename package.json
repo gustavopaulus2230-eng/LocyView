@@ -1,1 +1,11 @@
-{"name":"locytech-link-bio","version":"1.0.0","private":true,"description":"Demonstração do editor Link na bio para Monitor LocyTech","scripts":{"dev":"node server.mjs"}}
+{
+  "name": "locytech-link-bio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Front-end React da página de links e catálogo LocyTech",
+  "scripts": {
+    "dev": "node front/node_modules/vite/bin/vite.js front --host 127.0.0.1 --port 4173 --strictPort",
+    "build": "node front/node_modules/vite/bin/vite.js build front --outDir build",
+    "preview": "node front/node_modules/vite/bin/vite.js preview front --outDir build --host 127.0.0.1 --port 4173 --strictPort"
+  }
+}
