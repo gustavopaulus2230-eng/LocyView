@@ -6,7 +6,7 @@ Página de links e catálogo em React, com visual azul-escuro, azul e amarelo in
 
 Na pasta `front/`, execute `npm install` na primeira preparação e `npm run dev` para abrir a prévia em `http://127.0.0.1:4173/`.
 
-`npm run build` gera `build/`; `npm run preview` abre o resultado preparado. Não edite arquivos gerados ou o arquivo de trava das dependências manualmente.
+`npm run build` gera `../build/`, na raiz do repositório; `npm run preview` abre o resultado preparado. Não edite arquivos gerados ou o arquivo de trava das dependências manualmente.
 
 ## Funcionalidades
 

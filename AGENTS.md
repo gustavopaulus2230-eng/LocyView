@@ -10,7 +10,7 @@ Use React, ícones SVG de `Icon`, textos diretos em português e estados acessí
 
 Documente alterações estruturais na mesma tarefa: documentos de domínio primeiro, estas regras depois se necessário e README por último. Os documentos devem terminar com links reais para o código relacionado. Não mantenha arquivos temporários, código de teste ou logs de depuração.
 
-O resultado de Vite em `front/build/` e as dependências são gerados automaticamente. Preserve o `project_id` e o acesso existente em `.openai/hosting.json`. A construção deve ser validada antes de publicar.
+O resultado de Vite em `build/` na raiz do repositório e as dependências são gerados automaticamente. Preserve o `project_id` e o acesso existente em `.openai/hosting.json`. A construção deve ser validada antes de publicar.
 
 ## Código relacionado
 

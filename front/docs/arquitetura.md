@@ -28,7 +28,7 @@ O rascunho usa `localStorage` com a chave `locytech-hub:v3`, mantendo leitura da
 
 `shareUrl` cria um fragmento `#p=` com uma versão pública sanitizada. Esse modo não carrega o rascunho local nem mostra controles de edição. O orçamento é preparado apenas na memória; não é incluído no rascunho nem no link compartilhado.
 
-Vite gera `front/build/`. O arquivo `../.openai/hosting.json` na raiz do repositório aponta para esse diretório e mantém a identidade do Site existente. `build/`, `node_modules/` e o arquivo de trava das dependências são gerados automaticamente; não devem ser editados à mão.
+Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender à configuração estática do Sites. O arquivo `.openai/hosting.json` na raiz do repositório aponta para esse diretório e mantém a identidade do Site existente. `build/`, `node_modules/` e o arquivo de trava das dependências são gerados automaticamente; não devem ser editados à mão.
 
 ## Regras críticas
 

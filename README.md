@@ -6,7 +6,7 @@ O site existente mantém seus quatro atalhos: Instagram, WhatsApp, LinkedIn e No
 
 ## Executar
 
-Instale as dependências em `front/` com `npm install`. Na raiz, `npm run dev` abre a prévia em `http://127.0.0.1:4173/`; `npm run build` prepara `front/build/`; `npm run preview` serve esse resultado.
+Instale as dependências em `front/` com `npm install`. Na raiz, `npm run dev` abre a prévia em `http://127.0.0.1:4173/`; `npm run build` prepara `build/` na raiz para publicação; `npm run preview` serve esse resultado.
 
 O estado é local ao navegador. Não há API, autenticação, cadastro centralizado nem envio automático de orçamento. O acesso do Site hospedado não foi alterado.
 
