@@ -6,7 +6,7 @@ Implementar a página de links e o catálogo digital LocyTech em React, sem back
 
 ## Visão geral
 
-`src/index.jsx` monta `App`. A tela inicial `Hub` contém Instagram, WhatsApp, LinkedIn e Nossos produtos. A quarta opção abre `Products`; as outras abrem os endereços configurados. O painel `Editor` altera identidade, catálogo e links no ambiente de desenvolvimento.
+`src/index.jsx` monta `App` normalmente ou `MobilePreview` quando a URL contém `preview=mobile`. A tela inicial `Hub` contém Instagram, WhatsApp, LinkedIn e Nossos produtos. A quarta opção abre `Products`; as outras abrem os endereços configurados. O painel `Editor` altera identidade, catálogo e links no ambiente de desenvolvimento.
 
 O visual usa fundo azul-escuro, destaques azuis e amarelos, logo nítida integrada ao fundo estrelado e opções com texto grande. A marca pública é somente LocyTech, sem o prefixo Monitor. A composição em duas colunas passa a uma coluna em telas de até 900 pixels. As animações respeitam `prefers-reduced-motion`.
 
@@ -19,6 +19,7 @@ O visual usa fundo azul-escuro, destaques azuis e amarelos, logo nítida integra
 - `src/components/Modal.jsx` e `src/components/Icon.jsx`: diálogo nativo e ícones SVG.
 - `src/utils/pageState.js`: dados iniciais, validação, normalização e versões compartilhadas.
 - `src/styles/global.css`: tema, interação e responsividade.
+- `src/components/MobilePreview.jsx` e `src/styles/mobilePreview.css`: enquadramento isolado da prévia para celular.
 
 ## Modelo de dados / fluxo
 
@@ -27,6 +28,8 @@ O estado versão 3 contém `name`, `eyebrow`, `description`, `slug`, `logo`, `pr
 O rascunho usa `localStorage` com a chave `locytech-hub:v3`, mantendo leitura da chave anterior `locytech-catalog:v2`. `normalize` valida dados e atualiza somente padrões antigos conhecidos, preservando personalizações.
 
 `shareUrl` cria um fragmento `#p=` com uma versão pública sanitizada. Esse modo não carrega o rascunho local nem mostra controles de edição. O orçamento é preparado apenas na memória; não é incluído no rascunho nem no link compartilhado.
+
+A rota por parâmetro `?preview=mobile` enquadra o mesmo aplicativo em um iframe de mesma origem com área de 390 × 844 pixels ou menor em telas estreitas. O documento externo não monta `App`; o destino do iframe remove somente `preview`, preservando os demais parâmetros e o fragmento. O rótulo Prévia para celular e o link Abrir site normal identificam o modo e permitem sair dele na mesma aba. Essa visualização não emula um dispositivo e não modifica o layout normal, os contatos ou as regras de edição.
 
 `App` limita `ownerTools` a `import.meta.env.DEV && !initial.publicMode`. Assim, Personalizar página e Compartilhar página ficam disponíveis apenas na prévia de desenvolvimento não pública. O site publicado e a prévia de produção nunca renderizam esses controles, na página inicial ou no catálogo, independentemente do fragmento da URL. Essa limitação de interface não é autenticação e não cria outro modo de acesso em produção.
 
@@ -41,6 +44,7 @@ Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender
 - Manter os controles de personalização e compartilhamento fora de todas as construções de produção, sem depender de um link público para ocultá-los.
 - Não misturar dados de orçamento com os dados compartilhados da página.
 - Não usar emojis na interface; reutilizar `Icon`.
+- Não duplicar a aplicação para a prévia móvel; manter os estilos do enquadramento isolados e um título acessível no iframe.
 
 ## O que revisar antes de alterar
 
@@ -48,6 +52,7 @@ Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender
 - Conferir se a funcionalidade já existe antes de criar outra.
 - Testar celular e computador, teclado, modais e dados salvos anteriormente.
 - Conferir os dois controles somente no desenvolvimento não público e sua ausência na produção, tanto na página inicial quanto no catálogo.
+- Conferir o enquadramento móvel no host, a rolagem e os diálogos dentro do iframe, além da preservação de parâmetros e fragmento ao entrar ou sair da prévia.
 - Executar `npm run build` na raiz ou em `front/`.
 - Atualizar os documentos de domínio antes das regras do projeto e do README.
 
@@ -59,3 +64,5 @@ Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender
 - [Estilos](../src/styles/global.css)
 - [Dependências do front](../package.json)
 - [Configuração de publicação](../../.openai/hosting.json)
+- [Prévia para celular](../src/components/MobilePreview.jsx)
+- [Estilos da prévia](../src/styles/mobilePreview.css)

@@ -14,6 +14,8 @@ O estado é local ao navegador. Não há API, autenticação, cadastro centraliz
 
 Os controles Personalizar página e Compartilhar página ficam disponíveis somente na prévia de desenvolvimento, fora do modo público. Eles não aparecem no site publicado nem na prévia de produção, seja na página inicial ou no catálogo.
 
+Para visualizar o host em tamanho de celular mesmo em uma aba larga, adicione `?preview=mobile` ao endereço. A Prévia para celular enquadra o mesmo aplicativo em um iframe de mesma origem com área de 390 × 844 pixels ou menor em telas estreitas, sem duplicar o front. Não é emulação de aparelho. O link Abrir site normal retorna na mesma aba, preservando os demais parâmetros e o fragmento da URL.
+
 ## Documentação
 
 - [Orientações do front](front/README.md)
@@ -28,3 +30,6 @@ Os controles Personalizar página e Compartilhar página ficam disponíveis some
 - [Aplicação React](front/src/App.jsx)
 - [Comandos](package.json)
 - [Configuração do Site](.openai/hosting.json)
+- [Entrada e seleção da prévia](front/src/index.jsx)
+- [Prévia para celular](front/src/components/MobilePreview.jsx)
+- [Estilos da prévia](front/src/styles/mobilePreview.css)
