@@ -26,6 +26,8 @@ A logo aceita PNG, JPEG e WebP de até 1,5 MB. `optimizeLogo` limita uploads per
 
 `publicSnapshot` inclui somente dados públicos, produtos habilitados e URLs validadas. `encodeSnapshot` suporta caracteres UTF-8. `decodeSnapshot` valida o conteúdo antes de normalizar. Links públicos inválidos mostram aviso e a demonstração padrão, sem acessar o rascunho local.
 
+Instagram e WhatsApp já têm os destinos fornecidos pelo usuário. Somente o LinkedIn continua como exemplo, conforme o aviso da aba Links e contatos. A migração reconhece os endereços genéricos anteriores desses dois canais e os preços padrões antigos dos cinco produtos; não substitui links ou preços personalizados por valores novos.
+
 ## Regras críticas
 
 - O identificador da página não cria uma rota ou endereço curto nesta versão.

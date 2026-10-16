@@ -18,13 +18,15 @@ O formulário prepara uma mensagem para copiar. Um destino WhatsApp aparece some
 
 ## Modelo de dados / fluxo
 
-Cada produto contém `id`, `icon`, `category`, `title`, `description`, `note`, `price`, `features` e `enabled`. Existem cinco exemplos iniciais: Landing page (R$ 790,00), Site institucional (R$ 1.490,00), Loja virtual (R$ 2.490,00), Site para profissionais (R$ 1.090,00) e Página de links (R$ 290,00).
+Cada produto contém `id`, `icon`, `category`, `title`, `description`, `note`, `price`, `features` e `enabled`. Existem cinco produtos iniciais, todos com `price` igual a R$ 0,00: Landing page, Site institucional, Loja virtual, Site para profissionais e Página de links.
+
+O valor zero substitui os preços ilustrativos anteriores e não anuncia serviço gratuito. O aviso de demonstração permanece; o valor final depende do escopo do projeto. Ao carregar dados salvos, a normalização atualiza somente os preços padrões antigos conhecidos desses produtos, preservando preços personalizados.
 
 Os campos de orçamento ficam no estado temporário do diálogo. Fechar o diálogo descarta esses dados; `publicSnapshot` não os inclui.
 
 ## Regras críticas
 
-- Os preços são ilustrativos e devem continuar identificados dessa forma.
+- Os preços são ilustrativos e devem continuar identificados dessa forma, mesmo quando zerados; não apresentar o valor zero como oferta gratuita.
 - Não exibir produtos desativados nem oferecer seu orçamento.
 - Nunca confirmar envio, pagamento, contratação ou integração inexistente.
 - `quoteDestinations` aceita WhatsApp com telefone válido em `wa.me` ou `api.whatsapp.com/send`.

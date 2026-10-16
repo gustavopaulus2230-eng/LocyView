@@ -5,8 +5,8 @@ export const MAX_LOGO_BYTES = 1.5 * 1024 * 1024;
 export const PRODUCT_ICONS = ['window', 'globe', 'store', 'briefcase', 'links'];
 
 export const socialDefaults = [
-  { platform: 'instagram', title: 'Instagram', description: 'Publicações e novidades', url: 'https://www.instagram.com/' },
-  { platform: 'whatsapp', title: 'WhatsApp', description: 'Fale com a nossa equipe', url: 'https://www.whatsapp.com/' },
+  { platform: 'instagram', title: 'Instagram', description: 'Publicações e novidades', url: 'https://www.instagram.com/locytech/' },
+  { platform: 'whatsapp', title: 'WhatsApp', description: 'Fale com a nossa equipe', url: 'https://wa.me/5551920057268' },
   { platform: 'linkedin', title: 'LinkedIn', description: 'Projetos e conteúdo profissional', url: 'https://www.linkedin.com/' }
 ];
 
@@ -22,11 +22,11 @@ export const defaults = {
   backgroundColor: '#080f20',
   showBrand: true,
   products: [
-    { id: 'landing-page', icon: 'window', category: 'landing', title: 'Landing page', description: 'Página para apresentar uma oferta, captar contatos e divulgar campanhas.', note: 'Campanhas e lançamentos', price: 'R$ 790,00', features: ['Layout para a sua campanha', 'Apresentação da oferta e chamadas para ação', 'Versão para celular e computador', 'Links para os seus canais de contato'], enabled: true },
-    { id: 'site-institucional', icon: 'globe', category: 'sites', title: 'Site institucional', description: 'Site para apresentar a empresa, seus serviços e canais de atendimento.', note: 'Presença digital da empresa', price: 'R$ 1.490,00', features: ['Apresentação da empresa e dos serviços', 'Identidade visual da sua marca', 'Navegação para celular e computador', 'Canais de contato em destaque'], enabled: true },
-    { id: 'loja-virtual', icon: 'store', category: 'sites', title: 'Loja virtual', description: 'Catálogo online com categorias, produtos e fluxo de compra.', note: 'Catálogo e vendas online', price: 'R$ 2.490,00', features: ['Catálogo organizado por categorias', 'Páginas de apresentação dos produtos', 'Fluxo de compra definido para o negócio', 'Integrações definidas no orçamento'], enabled: true },
-    { id: 'site-profissionais', icon: 'briefcase', category: 'sites', title: 'Site para profissionais', description: 'Portfólio para apresentar seu trabalho, serviços e formas de contato.', note: 'Portfólio e serviços', price: 'R$ 1.090,00', features: ['Apresentação profissional', 'Portfólio e descrição dos serviços', 'Versão para celular e computador', 'Links para os seus canais'], enabled: true },
-    { id: 'pagina-links', icon: 'links', category: 'landing', title: 'Página de links', description: 'Seus canais e produtos reunidos em uma página para a bio do Instagram.', note: 'Links para a bio do Instagram', price: 'R$ 290,00', features: ['Logo, cores e textos da marca', 'Atalhos para site e redes sociais', 'Links organizados por prioridade', 'Versão para celular e computador'], enabled: true }
+    { id: 'landing-page', icon: 'window', category: 'landing', title: 'Landing page', description: 'Página para apresentar uma oferta, captar contatos e divulgar campanhas.', note: 'Campanhas e lançamentos', price: 'R$ 0,00', features: ['Layout para a sua campanha', 'Apresentação da oferta e chamadas para ação', 'Versão para celular e computador', 'Links para os seus canais de contato'], enabled: true },
+    { id: 'site-institucional', icon: 'globe', category: 'sites', title: 'Site institucional', description: 'Site para apresentar a empresa, seus serviços e canais de atendimento.', note: 'Presença digital da empresa', price: 'R$ 0,00', features: ['Apresentação da empresa e dos serviços', 'Identidade visual da sua marca', 'Navegação para celular e computador', 'Canais de contato em destaque'], enabled: true },
+    { id: 'loja-virtual', icon: 'store', category: 'sites', title: 'Loja virtual', description: 'Catálogo online com categorias, produtos e fluxo de compra.', note: 'Catálogo e vendas online', price: 'R$ 0,00', features: ['Catálogo organizado por categorias', 'Páginas de apresentação dos produtos', 'Fluxo de compra definido para o negócio', 'Integrações definidas no orçamento'], enabled: true },
+    { id: 'site-profissionais', icon: 'briefcase', category: 'sites', title: 'Site para profissionais', description: 'Portfólio para apresentar seu trabalho, serviços e formas de contato.', note: 'Portfólio e serviços', price: 'R$ 0,00', features: ['Apresentação profissional', 'Portfólio e descrição dos serviços', 'Versão para celular e computador', 'Links para os seus canais'], enabled: true },
+    { id: 'pagina-links', icon: 'links', category: 'landing', title: 'Página de links', description: 'Seus canais e produtos reunidos em uma página para a bio do Instagram.', note: 'Links para a bio do Instagram', price: 'R$ 0,00', features: ['Logo, cores e textos da marca', 'Atalhos para site e redes sociais', 'Links organizados por prioridade', 'Versão para celular e computador'], enabled: true }
   ],
   links: socialDefaults.map(link => ({ id: link.platform, platform: link.platform, title: link.title, url: link.url, enabled: true }))
 };
@@ -90,6 +90,18 @@ const previousProductCopy = {
   }
 };
 
+const previousProductPrices = new Map([
+  ['landing page', 'R$ 790,00'],
+  ['site institucional', 'R$ 1.490,00'],
+  ['loja virtual', 'R$ 2.490,00'],
+  ['site para profissionais', 'R$ 1.090,00'],
+  ['página de links', 'R$ 290,00']
+]);
+const previousSocialUrls = {
+  instagram: 'https://www.instagram.com/',
+  whatsapp: 'https://www.whatsapp.com/'
+};
+
 export function normalize(source) {
   source = source && typeof source === 'object' ? source : {};
   const oldPalettes = [
@@ -133,7 +145,7 @@ export function normalize(source) {
         title: text(product.title, 'Novo produto', 70),
         description: previousCopy && product.description === previousCopy.description ? previousProduct.description : text(product.description, '', 240),
         note: previousCopy && product.note === previousCopy.note ? previousProduct.note : text(product.note, '', 80),
-        price: legacy && /^sob consulta$/i.test(String(product.price || '').trim()) && previousProduct ? previousProduct.price : text(product.price, 'Sob consulta', 40) || 'Sob consulta',
+        price: previousProduct && ((legacy && /^sob consulta$/i.test(String(product.price || '').trim())) || String(product.price || '').trim() === previousProductPrices.get(productKey)) ? previousProduct.price : text(product.price, 'Sob consulta', 40) || 'Sob consulta',
         features: (Array.isArray(product.features) ? product.features : []).filter(item => typeof item === 'string').slice(0, 8).map(item => {
           const previousIndex = previousCopy?.features.indexOf(item) ?? -1;
           return previousIndex >= 0 ? previousProduct.features[previousIndex] : item.slice(0, 130);
@@ -143,7 +155,9 @@ export function normalize(source) {
     }),
     links: socialDefaults.map(defaultLink => {
       const existing = Array.isArray(source.links) ? source.links.find(link => link?.platform === defaultLink.platform) : null;
-      const url = existing ? text(existing.url, '', 2048) : defaultLink.url;
+      const existingUrl = existing ? text(existing.url, '', 2048) : defaultLink.url;
+      const previousUrl = previousSocialUrls[defaultLink.platform];
+      const url = previousUrl && existingUrl.trim().replace(/\/$/, '').toLowerCase() === previousUrl.replace(/\/$/, '').toLowerCase() ? defaultLink.url : existingUrl;
       return { id: defaultLink.platform, platform: defaultLink.platform, title: defaultLink.title, url: legacy && !url.trim() ? defaultLink.url : url, enabled: true };
     })
   };

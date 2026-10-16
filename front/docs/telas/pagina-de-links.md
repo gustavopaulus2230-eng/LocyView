@@ -21,6 +21,8 @@ Reunir os canais e o catálogo LocyTech em uma página adequada à bio do Instag
 
 `state.links` contém sempre Instagram, WhatsApp e LinkedIn. A quantidade exibida em Nossos produtos considera apenas produtos habilitados. Textos e cores são lidos do estado; URLs passam por `safeUrl`.
 
+Os destinos iniciais fornecidos pelo usuário são Instagram em `https://www.instagram.com/locytech/` e WhatsApp em `https://wa.me/5551920057268`, correspondente ao telefone +55 51 92005-7268. O LinkedIn permanece no endereço genérico `https://www.linkedin.com/`, ainda como exemplo editável. A normalização substitui apenas os endereços genéricos antigos conhecidos de Instagram e WhatsApp; outros links personalizados são preservados.
+
 ## Regras críticas
 
 - Não adicionar endereço, serviços de beleza ou opções além das quatro solicitadas.

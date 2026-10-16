@@ -13,12 +13,14 @@ Personalizar página e Compartilhar página aparecem apenas na prévia de desenv
 ## Funcionalidades
 
 - Instagram, WhatsApp, LinkedIn e Nossos produtos como quatro opções iniciais.
-- Catálogo aberto por clique, com filtros, detalhes e preços ilustrativos.
+- Catálogo aberto por clique, com filtros, detalhes e os cinco preços iniciais em R$ 0,00, ainda identificados como ilustrativos.
 - Editor interno de identidade, cores, logo, produtos e links, disponível somente em desenvolvimento.
 - Rascunho salvo no navegador e geração de link de demonstração no ambiente de desenvolvimento; links públicos não exibem controles de edição.
 - Solicitação de orçamento preparada para copiar, sem envio automático.
 
-Os links sociais iniciais são exemplos. Endereço curto e cadastro centralizado exigem integração futura com a LocyTech. A identidade pública usa somente LocyTech e a logo tratada é apresentada sem efeito pontilhado.
+O Instagram inicial abre `https://www.instagram.com/locytech/`; o WhatsApp usa `https://wa.me/5551920057268`, correspondente ao telefone +55 51 92005-7268. O LinkedIn permanece como exemplo editável. Os valores zerados não anunciam serviços gratuitos; o preço final depende do escopo. A normalização atualiza apenas endereços e preços padrões antigos conhecidos, preservando personalizações.
+
+Endereço curto e cadastro centralizado exigem integração futura com a LocyTech. A identidade pública usa somente LocyTech e a logo tratada é apresentada sem efeito pontilhado.
 
 ## Documentação
 

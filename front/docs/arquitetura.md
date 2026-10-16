@@ -36,7 +36,7 @@ Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender
 
 - Trabalhar somente neste front; não adicionar servidor, banco de dados, autenticação ou envio de mensagens nesta tarefa.
 - Manter exatamente quatro opções na página inicial e o catálogo fechado até o clique.
-- Mostrar que os preços são ilustrativos; links iniciais das plataformas são exemplos editáveis.
+- Mostrar que os preços são ilustrativos, inclusive R$ 0,00, sem anunciar oferta gratuita. Instagram e WhatsApp usam os destinos fornecidos pelo usuário; somente o LinkedIn permanece como exemplo editável.
 - Não carregar o rascunho privado quando um link público estiver inválido.
 - Manter os controles de personalização e compartilhamento fora de todas as construções de produção, sem depender de um link público para ocultá-los.
 - Não misturar dados de orçamento com os dados compartilhados da página.
