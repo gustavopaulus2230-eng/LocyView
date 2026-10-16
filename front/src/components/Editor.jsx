@@ -59,7 +59,7 @@ export default function Editor({ state, activeTab, onTab, onChange, onClose, onS
   }
 
   return <Modal id="editor-dialog" className="editor-drawer" labelledBy="editor-heading" onClose={onClose}>
-    <header className="drawer-header"><div><span className="drawer-eyebrow">MONITOR LOCYTECH</span><h2 id="editor-heading">Personalizar página<span>.</span></h2><p>Edite a marca, os produtos e os links.</p></div><button type="button" id="editor-close" className="icon-button" aria-label="Fechar personalização" onClick={onClose}><Icon name="close" /></button></header>
+    <header className="drawer-header"><div><span className="drawer-eyebrow">LOCYTECH</span><h2 id="editor-heading">Personalizar página<span>.</span></h2><p>Edite a marca, os produtos e os links.</p></div><button type="button" id="editor-close" className="icon-button" aria-label="Fechar personalização" onClick={onClose}><Icon name="close" /></button></header>
     <div className="drawer-tabs" role="tablist" aria-label="Personalização">{editorTabs.map(([key, label]) => <button type="button" key={key} ref={element => { tabsRef.current[key] = element; }} role="tab" id={`editor-tab-${key}`} data-editor-tab={key} className={activeTab === key ? 'active is-active' : ''} aria-selected={activeTab === key} aria-controls={`editor-panel-${key}`} tabIndex={activeTab === key ? 0 : -1} onClick={() => onTab(key)} onKeyDown={event => handleTabKey(event, key)}>{label}</button>)}</div>
     <div className="drawer-body">
       <section id="editor-panel-brand" role="tabpanel" aria-labelledby="editor-tab-brand" hidden={activeTab !== 'brand'}>
@@ -85,7 +85,7 @@ export default function Editor({ state, activeTab, onTab, onChange, onClose, onS
         <div className="editor-note"><Icon name="info" /><span>Os links iniciais são exemplos. Substitua pelos perfis da empresa e pelo link de atendimento do WhatsApp.</span></div>
         <div id="contact-links-list" className="editor-contact-list">{state.links.map(link => <article key={link.id} className="editor-contact" data-contact-id={link.id}><div className="editor-contact-head"><div className="editor-contact-title"><Icon name={link.platform} size={20} /><strong>{link.title}</strong></div></div><div className="editor-contact-fields"><div className="field"><label htmlFor={`contact-${link.id}-url`}>Link de destino</label><input id={`contact-${link.id}-url`} type="text" inputMode="url" value={link.url} maxLength={2048} placeholder="https://..." onChange={event => onChange({ links: state.links.map(item => item.id === link.id ? { ...item, url: event.target.value } : item) })} /></div></div></article>)}</div>
       </section>
-      <div className="drawer-demo-note"><Icon name="info" /><p>Demonstração apenas de front-end. O rascunho é salvo neste navegador. O cadastro centralizado depende da integração com o Monitor LocyTech.</p></div>
+      <div className="drawer-demo-note"><Icon name="info" /><p>Demonstração apenas de front-end. O rascunho é salvo neste navegador. O cadastro centralizado depende da integração com a LocyTech.</p></div>
     </div>
     <footer className="drawer-footer"><span id="editor-status" role="status">{status}</span><div><button type="button" id="save-page" className="button button-secondary" onClick={onSave}>Salvar rascunho</button><button type="button" id="publish-page" className="button button-primary" onClick={onShare}>Gerar link<Icon name="arrow" /></button></div></footer>
   </Modal>;

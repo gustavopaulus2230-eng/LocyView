@@ -8,7 +8,7 @@ Implementar a página de links e o catálogo digital LocyTech em React, sem back
 
 `src/index.jsx` monta `App`. A tela inicial `Hub` contém Instagram, WhatsApp, LinkedIn e Nossos produtos. A quarta opção abre `Products`; as outras abrem os endereços configurados. O painel `Editor` altera identidade, catálogo e links.
 
-O visual usa fundo azul-escuro, destaques azuis e amarelos, marca em partículas e opções com texto grande. A composição em duas colunas passa a uma coluna em telas de até 900 pixels. As animações respeitam `prefers-reduced-motion`.
+O visual usa fundo azul-escuro, destaques azuis e amarelos, logo nítida integrada ao fundo estrelado e opções com texto grande. A marca pública é somente LocyTech, sem o prefixo Monitor. A composição em duas colunas passa a uma coluna em telas de até 900 pixels. As animações respeitam `prefers-reduced-motion`.
 
 ## Arquivos fonte de verdade
 

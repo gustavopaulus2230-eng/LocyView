@@ -45,6 +45,12 @@ svg { flex: none; }
 .hub-brand::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(#8bafff06 1px, transparent 1px), linear-gradient(90deg, #8bafff06 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
 .hub-brand::after { content: ''; position: absolute; inset: 0; box-shadow: inset -25px 0 65px #07102125; pointer-events: none; }
 .brand-canvas { position: absolute; display: block; width: 100%; height: 100%; inset: 0; z-index: 1; }
+.brand-artwork { position: absolute; inset: 85px 50px 120px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.brand-artwork-default { mix-blend-mode: screen; }
+.brand-artwork-default.is-light-backdrop { mix-blend-mode: normal; }
+.brand-artwork-default.is-light-backdrop .brand-logo { border-radius: 18px; }
+.brand-logo { display: block; width: min(100%, 490px); height: auto; max-height: 100%; object-fit: contain; transition: transform .35s ease; }
+.brand-artwork:hover .brand-logo { transform: translateY(-3px); }
 .brand-topline { position: absolute; z-index: 2; top: 30px; left: 36px; right: 30px; display: flex; align-items: center; gap: 11px; color: color-mix(in srgb, var(--brand-ink) 75%, var(--page-background)); font-size: 12px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
 .brand-topline > svg, .brand-mark { width: 26px; height: 26px; color: var(--brand-accent); }
 .brand-topline span span, .brand-topline strong { color: var(--brand-accent); font-weight: 650; }
@@ -310,6 +316,8 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 @media (max-width: 900px) {
   .hub-layout { display: block; min-height: 100dvh; }
   .hub-brand { min-height: 0; height: 400px; }
+  .brand-artwork { inset: 50px 30px 90px; }
+  .brand-logo { width: min(100%, 300px); }
   .brand-topline { top: 24px; left: 27px; right: 27px; font-size: 11px; }
   .brand-caption { bottom: 20px; }
   .brand-caption p { font-size: 14px; }
@@ -338,6 +346,8 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 
 @media (max-width: 540px) {
   .hub-brand { height: 360px; }
+  .brand-artwork { inset: 48px 30px 78px; }
+  .brand-logo { width: min(100%, 260px); }
   .brand-topline { top: 21px; left: 23px; right: 23px; gap: 9px; font-size: 10px; letter-spacing: .1em; }
   .brand-topline > svg, .brand-mark { width: 23px; height: 23px; }
   .brand-caption { left: 18px; right: 18px; bottom: 17px; }

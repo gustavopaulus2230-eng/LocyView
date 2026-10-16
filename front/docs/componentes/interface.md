@@ -6,7 +6,7 @@ Padronizar a identidade visual inspirada na referência, os ícones e os diálog
 
 ## Visão geral
 
-`BrandAtmosphere` desenha a logo original em partículas sobre estrelas e grade discreta. O movimento reage ao ponteiro e é desativado quando o sistema solicita movimento reduzido. A logo padrão usa apenas o símbolo da imagem original, acompanhado de MONITOR e LOCYTECH. Logos personalizadas são processadas separadamente; sem imagem válida, aparece o monograma.
+`BrandAtmosphere` apresenta a logo completa e nítida sobre estrelas e grade discreta. O nome público é somente LocyTech. O efeito pontilhado foi retirado da logo para preservar a leitura do símbolo e do nome. Apenas as estrelas têm movimento suave, desativado quando o sistema solicita movimento reduzido. Sem imagem válida, aparece o monograma.
 
 `Icon` reutiliza os desenhos SVG da interface anterior. `Modal` usa o elemento nativo `dialog`, com bloqueio da rolagem de fundo, cancelamento por Escape e fechamento por clique fora da área do diálogo.
 
@@ -17,10 +17,21 @@ Padronizar a identidade visual inspirada na referência, os ícones e os diálog
 - `src/components/Modal.jsx`.
 - `src/styles/global.css`.
 - `public/assets/locytech.png`.
+- `public/assets/locytech-hd.png`.
 
 ## Modelo de dados / fluxo
 
-`BrandAtmosphere` recebe `logo`, `name`, `primaryColor`, `accentColor` e `backgroundColor`. Um `ResizeObserver` ajusta o canvas ao espaço disponível e limita a escala de pixels para reduzir custo de desenho. O efeito limpa animação, observador e eventos ao desmontar. Pixels brancos são descartados somente no arquivo padrão; logos personalizadas transparentes preservam seus pixels claros.
+`BrandAtmosphere` recebe `logo`, `name` e `backgroundColor`. A imagem usa `safeLogo`, sem amostragem ou descarte de pixels. A versão padrão tratada tem fundo preto uniforme integrado visualmente ao fundo escuro por `mix-blend-mode: screen`, sem alterar o arquivo. Em fundos claros ela aparece como uma peça escura com cantos arredondados. Logos personalizadas mantêm seu próprio arquivo e transparência sem esse efeito. Um `ResizeObserver` ajusta o canvas das estrelas ao espaço disponível e limita a escala de pixels para reduzir custo de desenho. O efeito limpa animação, observador e eventos ao desmontar.
+
+A logo padrão está em `public/assets/locytech-hd.png`; o original foi preservado em `public/assets/locytech.png`. `safeLogo` migra o caminho padrão antigo para o novo, sem substituir logos personalizadas ou a opção de remover a logo.
+
+### Tratamento da logo
+
+Foi usada a ferramenta integrada de edição de imagem, sem CLI. A versão selecionada usa fundo preto opaco porque as tentativas transparentes introduziram falhas nas letras. O arquivo selecionado preserva as formas principais do pavão/circuito e o nome LocyTech, com contornos mais limpos. A imagem original continua disponível para comparação.
+
+Pedido de tratamento da versão selecionada, traduzido para PT-BR:
+
+> Restaurar a logo anexada com contornos mais limpos e nítidos, preservando o desenho. Reproduzir o pavão/circuito original com sete penas e o texto exato LocyTech. As letras devem ser sólidas, opacas e contínuas, sem falhas ou arranhões: Locy em azul-ciano claro e Tech em amarelo quente, mantendo formas e espaçamento. Preservar a silhueta branca do pavão, as linhas brancas dos circuitos e seus terminais circulares, a ordem das penas e as proporções. Usar preenchimentos planos, sem textura, granulação, sombra, volume ou brilho. Aplicar fundo preto uniforme #000000, opaco, inclusive nos espaços entre penas e nas aberturas naturais das letras, sem extrair o fundo. Centralizar o símbolo completo acima da palavra LocyTech, com margem uniforme de 6%, sem cortes. O único texto deve ser LocyTech, sem Monitor ou palavras adicionais.
 
 `contrastText` escolhe preto ou branco conforme a luminância da cor configurada. Botões principais e filtros ativos usam esse contraste; a área da marca usa a cor de fundo escolhida. O painel mantém uma superfície escura para preservar a leitura dos cartões.
 
@@ -43,8 +54,9 @@ Padronizar a identidade visual inspirada na referência, os ícones e os diálog
 
 ## Código relacionado
 
-- [Marca em partículas](../../src/components/BrandAtmosphere.jsx)
+- [Logo e estrelas](../../src/components/BrandAtmosphere.jsx)
 - [Ícones SVG](../../src/components/Icon.jsx)
 - [Diálogo nativo](../../src/components/Modal.jsx)
 - [Tema e responsividade](../../src/styles/global.css)
 - [Logo original](../../public/assets/locytech.png)
+- [Logo tratada](../../public/assets/locytech-hd.png)

@@ -1,6 +1,6 @@
 export const STORAGE_KEY = 'locytech-hub:v3';
 export const LEGACY_STORAGE_KEY = 'locytech-catalog:v2';
-export const DEFAULT_LOGO = './assets/locytech.png';
+export const DEFAULT_LOGO = './assets/locytech-hd.png';
 export const MAX_LOGO_BYTES = 1.5 * 1024 * 1024;
 export const PRODUCT_ICONS = ['window', 'globe', 'store', 'briefcase', 'links'];
 
@@ -46,7 +46,8 @@ export function contrastText(hex) {
 }
 
 export function safeLogo(value) {
-  return value === DEFAULT_LOGO || /^data:image\/(?:png|jpeg|webp);base64,[a-z\d+/=]+$/i.test(value || '') && value.length < 3 * 1024 * 1024 ? value : '';
+  if (value === DEFAULT_LOGO || value === './assets/locytech.png') return DEFAULT_LOGO;
+  return /^data:image\/(?:png|jpeg|webp);base64,[a-z\d+/=]+$/i.test(value || '') && value.length < 3 * 1024 * 1024 ? value : '';
 }
 
 export function safeUrl(raw) {

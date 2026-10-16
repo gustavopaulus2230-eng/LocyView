@@ -4,7 +4,7 @@ import Icon from '../components/Icon';
 import { safeUrl, socialDefaults } from '../utils/pageState';
 
 export function BrandFooter() {
-  return <footer id="site-footer" className="site-footer"><Icon name="brand" size={18} /><span>Monitor LocyTech</span><span className="footer-divider" aria-hidden="true">/</span><span>Links e produtos digitais</span></footer>;
+  return <footer id="site-footer" className="site-footer"><Icon name="brand" size={18} /><span>LocyTech</span><span className="footer-divider" aria-hidden="true">/</span><span>Links e produtos digitais</span></footer>;
 }
 
 function CardCopy({ title, description, count }) {

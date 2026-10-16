@@ -2,7 +2,7 @@
 
 Front-end React da página LocyTech, atualizado em 2026-10-16 a partir da referência visual fornecida. O código da aplicação está em `front/`, separado de qualquer back-end.
 
-O site existente mantém seus quatro atalhos: Instagram, WhatsApp, LinkedIn e Nossos produtos. O catálogo aparece somente após o clique, com preços ilustrativos e opções editáveis. O visual é responsivo para celular e computador.
+O site existente mantém seus quatro atalhos: Instagram, WhatsApp, LinkedIn e Nossos produtos. O catálogo aparece somente após o clique, com preços ilustrativos e opções editáveis. O visual é responsivo para celular e computador. A identidade pública usa somente LocyTech, com a logo tratada nítida sobre o fundo estrelado.
 
 ## Executar
 

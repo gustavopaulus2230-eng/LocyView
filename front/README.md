@@ -16,7 +16,7 @@ Na pasta `front/`, execute `npm install` na primeira preparação e `npm run dev
 - Rascunho salvo no navegador e link de demonstração sem controles de edição.
 - Solicitação de orçamento preparada para copiar, sem envio automático.
 
-Os links sociais iniciais são exemplos. Endereço curto e cadastro centralizado exigem integração futura com o Monitor LocyTech.
+Os links sociais iniciais são exemplos. Endereço curto e cadastro centralizado exigem integração futura com a LocyTech. A identidade pública usa somente LocyTech e a logo tratada é apresentada sem efeito pontilhado.
 
 ## Documentação
 
