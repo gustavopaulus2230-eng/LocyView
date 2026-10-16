@@ -6,7 +6,7 @@ Implementar a página de links e o catálogo digital LocyTech em React, sem back
 
 ## Visão geral
 
-`src/index.jsx` monta `App`. A tela inicial `Hub` contém Instagram, WhatsApp, LinkedIn e Nossos produtos. A quarta opção abre `Products`; as outras abrem os endereços configurados. O painel `Editor` altera identidade, catálogo e links.
+`src/index.jsx` monta `App`. A tela inicial `Hub` contém Instagram, WhatsApp, LinkedIn e Nossos produtos. A quarta opção abre `Products`; as outras abrem os endereços configurados. O painel `Editor` altera identidade, catálogo e links no ambiente de desenvolvimento.
 
 O visual usa fundo azul-escuro, destaques azuis e amarelos, logo nítida integrada ao fundo estrelado e opções com texto grande. A marca pública é somente LocyTech, sem o prefixo Monitor. A composição em duas colunas passa a uma coluna em telas de até 900 pixels. As animações respeitam `prefers-reduced-motion`.
 
@@ -28,6 +28,8 @@ O rascunho usa `localStorage` com a chave `locytech-hub:v3`, mantendo leitura da
 
 `shareUrl` cria um fragmento `#p=` com uma versão pública sanitizada. Esse modo não carrega o rascunho local nem mostra controles de edição. O orçamento é preparado apenas na memória; não é incluído no rascunho nem no link compartilhado.
 
+`App` limita `ownerTools` a `import.meta.env.DEV && !initial.publicMode`. Assim, Personalizar página e Compartilhar página ficam disponíveis apenas na prévia de desenvolvimento não pública. O site publicado e a prévia de produção nunca renderizam esses controles, na página inicial ou no catálogo, independentemente do fragmento da URL. Essa limitação de interface não é autenticação e não cria outro modo de acesso em produção.
+
 Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender à configuração estática do Sites. O arquivo `.openai/hosting.json` na raiz do repositório aponta para esse diretório e mantém a identidade do Site existente. `build/`, `node_modules/` e o arquivo de trava das dependências são gerados automaticamente; não devem ser editados à mão.
 
 ## Regras críticas
@@ -36,6 +38,7 @@ Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender
 - Manter exatamente quatro opções na página inicial e o catálogo fechado até o clique.
 - Mostrar que os preços são ilustrativos; links iniciais das plataformas são exemplos editáveis.
 - Não carregar o rascunho privado quando um link público estiver inválido.
+- Manter os controles de personalização e compartilhamento fora de todas as construções de produção, sem depender de um link público para ocultá-los.
 - Não misturar dados de orçamento com os dados compartilhados da página.
 - Não usar emojis na interface; reutilizar `Icon`.
 
@@ -44,6 +47,7 @@ Vite gera `build/` na raiz do repositório, fora da pasta `front/`, para atender
 - Ler a tela/componente real e a documentação do domínio.
 - Conferir se a funcionalidade já existe antes de criar outra.
 - Testar celular e computador, teclado, modais e dados salvos anteriormente.
+- Conferir os dois controles somente no desenvolvimento não público e sua ausência na produção, tanto na página inicial quanto no catálogo.
 - Executar `npm run build` na raiz ou em `front/`.
 - Atualizar os documentos de domínio antes das regras do projeto e do README.
 

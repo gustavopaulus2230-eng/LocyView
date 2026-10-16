@@ -169,7 +169,7 @@ export default function App() {
 
   const detailProduct = modal?.type === 'detail' ? state.products.find(product => product.id === modal.id && product.enabled) : null;
   const status = statusOverride || (dirty ? 'Alterações não salvas' : savedAt ? 'Salvo neste navegador' : 'Personalize sua página');
-  const ownerTools = !initial.publicMode && <div id="owner-tools" className="owner-tools"><button type="button" id="editor-launch" className="owner-button" onClick={() => openEditor()}><Icon name="edit" />Personalizar página</button><button type="button" id="share-launch" className="owner-share" aria-label="Compartilhar página" title="Compartilhar página" onClick={openShare}><Icon name="share" /></button></div>;
+  const ownerTools = import.meta.env.DEV && !initial.publicMode && <div id="owner-tools" className="owner-tools"><button type="button" id="editor-launch" className="owner-button" onClick={() => openEditor()}><Icon name="edit" />Personalizar página</button><button type="button" id="share-launch" className="owner-share" aria-label="Compartilhar página" title="Compartilhar página" onClick={openShare}><Icon name="share" /></button></div>;
 
   return <div className="app-shell" style={theme}>
     <main id="site-shell" className={`site-shell${currentView === 'products' ? ' showing-products' : ''}`}>

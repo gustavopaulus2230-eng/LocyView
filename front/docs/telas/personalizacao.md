@@ -2,11 +2,13 @@
 
 ## Objetivo
 
-Editar identidade, produtos e canais da página sem depender de um back-end nesta demonstração.
+Editar identidade, produtos e canais da página no ambiente de desenvolvimento, sem depender de um back-end nesta demonstração.
 
 ## Visão geral
 
-`Editor` abre as abas Identidade, Produtos e Links e contatos. Alterações aparecem na prévia. Salvar rascunho grava o estado somente no navegador. Gerar link abre `ShareDialog` com uma versão pública da página.
+Os controles Personalizar página e Compartilhar página são renderizados somente quando `import.meta.env.DEV` está ativo e a página não está no modo público. Eles não aparecem em nenhuma construção de produção, inclusive na página inicial, no catálogo ou na prévia servida por `npm run preview`. Não existe um modo ou endereço alternativo para habilitá-los no site publicado.
+
+Nesse ambiente interno, `Editor` abre as abas Identidade, Produtos e Links e contatos. Alterações aparecem na prévia. Salvar rascunho grava o estado somente no navegador. Gerar link abre `ShareDialog` com uma versão pública da página.
 
 `ProductEditor` permite adicionar ou editar um produto. O painel também permite ordenar, ocultar e remover produtos. As abas podem ser percorridas pelas setas do teclado, Home e End.
 
@@ -29,12 +31,13 @@ A logo aceita PNG, JPEG e WebP de até 1,5 MB. `optimizeLogo` limita uploads per
 - O identificador da página não cria uma rota ou endereço curto nesta versão.
 - Não anunciar cadastro centralizado ou publicação integrada à LocyTech como concluídos.
 - Preservar dados personalizados durante a migração dos padrões antigos.
-- Não mostrar os controles de edição no modo público.
+- Não mostrar os controles de personalização e compartilhamento em produção nem no modo público de desenvolvimento. A condição de ambiente controla a interface; não implementa autenticação nem substitui uma integração administrativa futura.
 - Não inserir segredos, dados internos ou campos de orçamento no fragmento compartilhado.
 
 ## O que revisar antes de alterar
 
-- Testar as três abas, salvar, recarregar e gerar link.
+- No ambiente de desenvolvimento, testar as três abas, salvar, recarregar e gerar link.
+- Na construção de produção, conferir que os dois controles não existem na página inicial nem no catálogo, com ou sem `#p=`; em desenvolvimento, conferir também que não aparecem nos links públicos.
 - Conferir edição, ordem, visibilidade e remoção de produtos.
 - Testar URL inválida, logo removida e troca da logo.
 - Conferir versões legadas e dados personalizados.

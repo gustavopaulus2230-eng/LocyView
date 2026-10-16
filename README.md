@@ -10,6 +10,8 @@ Instale as dependências em `front/` com `npm install`. Na raiz, `npm run dev` a
 
 O estado é local ao navegador. Não há API, autenticação, cadastro centralizado nem envio automático de orçamento. O acesso do Site hospedado não foi alterado.
 
+Os controles Personalizar página e Compartilhar página ficam disponíveis somente na prévia de desenvolvimento, fora do modo público. Eles não aparecem no site publicado nem na prévia de produção, seja na página inicial ou no catálogo.
+
 ## Documentação
 
 - [Orientações do front](front/README.md)

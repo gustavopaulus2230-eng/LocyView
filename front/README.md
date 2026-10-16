@@ -8,12 +8,14 @@ Na pasta `front/`, execute `npm install` na primeira preparação e `npm run dev
 
 `npm run build` gera `../build/`, na raiz do repositório; `npm run preview` abre o resultado preparado. Não edite arquivos gerados ou o arquivo de trava das dependências manualmente.
 
+Personalizar página e Compartilhar página aparecem apenas na prévia de desenvolvimento, fora do modo público. O site publicado e `npm run preview` não exibem esses controles na página inicial nem no catálogo.
+
 ## Funcionalidades
 
 - Instagram, WhatsApp, LinkedIn e Nossos produtos como quatro opções iniciais.
 - Catálogo aberto por clique, com filtros, detalhes e preços ilustrativos.
-- Editor de identidade, cores, logo, produtos e links.
-- Rascunho salvo no navegador e link de demonstração sem controles de edição.
+- Editor interno de identidade, cores, logo, produtos e links, disponível somente em desenvolvimento.
+- Rascunho salvo no navegador e geração de link de demonstração no ambiente de desenvolvimento; links públicos não exibem controles de edição.
 - Solicitação de orçamento preparada para copiar, sem envio automático.
 
 Os links sociais iniciais são exemplos. Endereço curto e cadastro centralizado exigem integração futura com a LocyTech. A identidade pública usa somente LocyTech e a logo tratada é apresentada sem efeito pontilhado.
