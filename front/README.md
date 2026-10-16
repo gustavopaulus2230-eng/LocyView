@@ -10,7 +10,7 @@ Na pasta `front/`, execute `npm install` na primeira preparação e `npm run dev
 
 Personalizar página e Compartilhar página aparecem apenas na prévia de desenvolvimento, fora do modo público. O site publicado e `npm run preview` não exibem esses controles na página inicial nem no catálogo.
 
-Adicione `?preview=mobile` ao endereço para abrir a Prévia para celular, inclusive no host publicado. Ela mostra o aplicativo existente em um quadro de 390 × 844 pixels, reduzido em telas menores, sem duplicar o front. É uma prévia de tamanho, não emulação de aparelho. O link Abrir site normal retorna ao aplicativo na mesma aba; os demais parâmetros e o fragmento compartilhado são preservados.
+Use o endereço principal `/` em qualquer aparelho. O layout prioriza o celular, com identidade compacta, atalhos grandes em uma coluna e rolagem natural. A partir de 901 pixels, identidade e atalhos ficam lado a lado. A adaptação é feita pela largura disponível, sem identificar o aparelho, usar iframe ou exigir um link especial. Links antigos com `?preview=mobile` abrem a mesma aplicação; o parâmetro é ignorado, sem redirecionamento ou remoção dos demais parâmetros e do fragmento compartilhado.
 
 ## Funcionalidades
 
@@ -19,7 +19,7 @@ Adicione `?preview=mobile` ao endereço para abrir a Prévia para celular, inclu
 - Editor interno de identidade, cores, logo, produtos e links, disponível somente em desenvolvimento.
 - Rascunho salvo no navegador e geração de link de demonstração no ambiente de desenvolvimento; links públicos não exibem controles de edição.
 - Solicitação de orçamento preparada para copiar, sem envio automático.
-- Prévia móvel por parâmetro de URL, com enquadramento isolado e iframe acessível de mesma origem.
+- Layout responsivo com prioridade para celular e adaptação automática para tablet e computador no mesmo endereço.
 
 O Instagram inicial abre `https://www.instagram.com/locytech/`; o WhatsApp usa `https://wa.me/5551920057268`, correspondente ao telefone +55 51 92005-7268. O LinkedIn permanece como exemplo editável. Os valores zerados não anunciam serviços gratuitos; o preço final depende do escopo. A normalização atualiza apenas endereços e preços padrões antigos conhecidos, preservando personalizações.
 
@@ -40,5 +40,3 @@ Endereço curto e cadastro centralizado exigem integração futura com a LocyTec
 - [Dados e versões públicas](src/utils/pageState.js)
 - [Tema](src/styles/global.css)
 - [Dependências e comandos](package.json)
-- [Prévia para celular](src/components/MobilePreview.jsx)
-- [Estilos da prévia](src/styles/mobilePreview.css)

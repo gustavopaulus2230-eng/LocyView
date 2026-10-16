@@ -40,52 +40,53 @@ svg { flex: none; }
 .site-shell { width: 100%; margin: 0; }
 
 /* O ambiente da marca e os quatro canais formam a primeira tela. */
-.hub-layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(390px, 1fr); min-height: 100dvh; width: 100%; }
-.hub-brand { position: relative; min-width: 0; min-height: 100%; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 5% 88%, color-mix(in srgb, var(--brand-primary) 15%, transparent) 0, transparent 52%), radial-gradient(ellipse at 92% 24%, #12203b66 0, transparent 44%), var(--page-background); }
+.hub-layout { display: block; min-height: 100dvh; width: 100%; }
+.hub-brand { position: relative; min-width: 0; min-height: 0; height: 240px; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 5% 88%, color-mix(in srgb, var(--brand-primary) 15%, transparent) 0, transparent 52%), radial-gradient(ellipse at 92% 24%, #12203b66 0, transparent 44%), var(--page-background); }
 .hub-brand::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(#8bafff06 1px, transparent 1px), linear-gradient(90deg, #8bafff06 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
 .hub-brand::after { content: ''; position: absolute; inset: 0; box-shadow: inset -25px 0 65px #07102125; pointer-events: none; }
 .brand-canvas { position: absolute; display: block; width: 100%; height: 100%; inset: 0; z-index: 1; }
-.brand-artwork { position: absolute; inset: 85px 50px 120px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.brand-artwork { position: absolute; inset: 28px 24px 48px; display: flex; align-items: center; justify-content: center; z-index: 2; }
 .brand-artwork-default { mix-blend-mode: screen; }
 .brand-artwork-default.is-light-backdrop { mix-blend-mode: normal; }
 .brand-artwork-default.is-light-backdrop .brand-logo { border-radius: 18px; }
-.brand-logo { display: block; width: min(100%, 490px); height: auto; max-height: 100%; object-fit: contain; transition: transform .35s ease; }
+.brand-logo { display: block; width: min(100%, 230px); height: auto; max-height: 100%; object-fit: contain; transition: transform .35s ease; }
 .brand-artwork:hover .brand-logo { transform: translateY(-3px); }
-.brand-topline { position: absolute; z-index: 2; top: 30px; left: 36px; right: 30px; display: flex; align-items: center; gap: 11px; color: color-mix(in srgb, var(--brand-ink) 75%, var(--page-background)); font-size: 12px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
-.brand-topline > svg, .brand-mark { width: 26px; height: 26px; color: var(--brand-accent); }
+.brand-topline { position: absolute; z-index: 2; top: 18px; left: 20px; right: 20px; display: flex; align-items: center; gap: 9px; color: color-mix(in srgb, var(--brand-ink) 75%, var(--page-background)); font-size: 10px; font-weight: 600; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; }
+.brand-topline > svg, .brand-mark { width: 23px; height: 23px; color: var(--brand-accent); }
 .brand-topline span span, .brand-topline strong { color: var(--brand-accent); font-weight: 650; }
 .brand-topline-dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--brand-accent); box-shadow: 0 0 13px #f4cf4633; }
-.brand-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 70px 28px 90px; color: #96bfff; }
-.brand-fallback strong { font-family: 'Manrope', sans-serif; font-size: clamp(30px, 4vw, 57px); font-weight: 800; letter-spacing: -.04em; text-align: center; overflow-wrap: anywhere; }
-.brand-monogram { display: grid; place-items: center; width: 112px; height: 112px; border: 1px solid #557fb4; border-radius: 24px; background: #183153; font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 750; color: var(--brand-accent); }
+.brand-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 40px 20px 45px; color: #96bfff; }
+.brand-fallback strong { font-family: 'Manrope', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -.04em; text-align: center; overflow-wrap: anywhere; }
+.brand-monogram { display: grid; place-items: center; width: 64px; height: 64px; border: 1px solid #557fb4; border-radius: 16px; background: #183153; font-family: 'Manrope', sans-serif; font-size: 27px; font-weight: 750; color: var(--brand-accent); }
 .brand-wordmark { position: relative; z-index: 2; text-align: center; pointer-events: none; }
 .brand-kicker { color: var(--brand-primary); text-transform: uppercase; letter-spacing: .3em; }
-.brand-caption { position: absolute; z-index: 2; left: 24px; right: 24px; bottom: 38px; text-align: center; pointer-events: none; }
-.brand-caption p { margin: 0 0 5px; color: color-mix(in srgb, var(--brand-ink) 73%, var(--page-background)); font-size: 15px; line-height: 1.6; letter-spacing: .02em; }
-.brand-caption span { color: color-mix(in srgb, var(--brand-ink) 55%, var(--page-background)); font-size: 13px; line-height: 1.7; }
-.hub-navigation-wrap { min-width: 0; padding: 66px clamp(28px, 3.1vw, 65px) 25px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg, color-mix(in srgb, var(--page-background) 20%, #0d1730) 0%, color-mix(in srgb, var(--page-background) 20%, #0a1224) 65%, #080f1f 100%); border-left: 1px solid #1c2b443d; position: relative; }
+.brand-caption { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 12px; text-align: center; pointer-events: none; }
+.brand-caption p { margin: 0 0 2px; color: color-mix(in srgb, var(--brand-ink) 73%, var(--page-background)); font-size: 13px; line-height: 1.6; letter-spacing: .02em; }
+.brand-caption span { color: color-mix(in srgb, var(--brand-ink) 55%, var(--page-background)); font-size: 12px; line-height: 1.7; }
+.hub-navigation-wrap { min-width: 0; padding: 24px 20px 28px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg, color-mix(in srgb, var(--page-background) 20%, #0d1730) 0%, color-mix(in srgb, var(--page-background) 20%, #0a1224) 65%, #080f1f 100%); border: 0; position: relative; }
+.hub-navigation-wrap > .hub-identity, .hub-navigation, .hub-navigation-wrap > .site-footer, .hub-navigation-wrap > .owner-tools { width: 100%; max-width: 520px; margin-left: auto; margin-right: auto; }
 .hub-navigation-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #447cbd44, transparent); }
-.hub-identity { min-width: 0; margin-bottom: 27px; }
-.hub-panel-eyebrow, .identity-eyebrow { margin: 0 0 12px; font-size: 11px; line-height: 1.7; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; color: var(--brand-primary); }
-.hub-panel-title, .identity-name { font-family: 'Manrope', sans-serif; font-size: clamp(29px, 2.2vw, 40px); line-height: 1.24; letter-spacing: -.045em; font-weight: 800; color: var(--ink); margin: 0 0 13px; overflow-wrap: anywhere; }
+.hub-identity { min-width: 0; margin-bottom: 22px; }
+.hub-panel-eyebrow, .identity-eyebrow { margin: 0 0 8px; font-size: 10px; line-height: 1.7; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; color: var(--brand-primary); }
+.hub-panel-title, .identity-name { font-family: 'Manrope', sans-serif; font-size: 31px; line-height: 1.25; letter-spacing: -.045em; font-weight: 800; color: var(--ink); margin: 0 0 10px; overflow-wrap: anywhere; }
 .hub-panel-title:focus, .identity-name:focus, #products-heading:focus { outline: none; }
-.hub-panel-description, .identity-description { margin: 0; font-size: 16px; line-height: 1.75; font-weight: 400; color: var(--muted); white-space: pre-line; overflow-wrap: anywhere; }
+.hub-panel-description, .identity-description { margin: 0; font-size: 16px; line-height: 1.65; font-weight: 400; color: var(--muted); white-space: pre-line; overflow-wrap: anywhere; }
 .identity-logo { width: 74px; height: 74px; object-fit: contain; border-radius: 15px; background: #f5f5f5; margin-bottom: 24px; }
 .identity-monogram { display: grid; place-items: center; font: 800 26px 'Manrope', sans-serif; color: var(--brand-primary); background: #17263e; }
 .identity-signature { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--subtle); font-size: 12px; }
 .signature-dot { width: 5px; height: 5px; flex: none; background: var(--brand-accent); border-radius: 50%; }
-.hub-navigation { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.hub-card { display: flex; align-items: center; gap: 17px; position: relative; width: 100%; min-height: 105px; padding: 19px 18px; text-align: left; border: 1px solid #213551; background: #0a1528; border-radius: 12px; box-shadow: 0 3px 7px #02071118; }
+.hub-navigation { display: flex; flex-direction: column; gap: 11px; min-width: 0; }
+.hub-card { display: flex; align-items: center; gap: 13px; position: relative; width: 100%; min-height: 96px; padding: 17px 15px; text-align: left; border: 1px solid #213551; background: #0a1528; border-radius: 11px; box-shadow: 0 3px 7px #02071118; }
 .hub-card:hover { border-color: color-mix(in srgb, var(--brand-primary) 65%, #233b5b); background: #101e35; transform: translateY(-2px); box-shadow: 0 9px 26px #01061135; }
 .hub-card:active { transform: translateY(0); }
-.hub-card-icon { display: grid; place-items: center; width: 53px; height: 53px; flex: none; border-radius: 11px; color: color-mix(in srgb, var(--brand-primary) 65%, #e9f1ff); background: color-mix(in srgb, var(--brand-primary) 13%, #0c1729); border: 1px solid #26446b66; }
-.hub-card-icon svg { width: 27px; height: 27px; stroke-width: 1.65; }
-svg.hub-card-icon { padding: 13px; }
+.hub-card-icon { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: 10px; color: color-mix(in srgb, var(--brand-primary) 65%, #e9f1ff); background: color-mix(in srgb, var(--brand-primary) 13%, #0c1729); border: 1px solid #26446b66; }
+.hub-card-icon svg { width: 25px; height: 25px; stroke-width: 1.65; }
+svg.hub-card-icon { padding: 11px; }
 .hub-card-copy { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
-.hub-card-title { font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 750; line-height: 1.35; letter-spacing: -.035em; color: #edf3ff; overflow-wrap: anywhere; }
-.hub-card-description { color: #96a7c3; font-size: 14px; line-height: 1.6; font-weight: 400; overflow-wrap: anywhere; }
-.hub-card-arrow { display: flex; align-items: center; justify-content: center; margin-left: auto; width: 21px; height: 21px; color: #607fa9; flex: none; transition: transform .2s ease, color .2s ease; }
-.hub-card-arrow svg { width: 20px; height: 20px; }
+.hub-card-title { font-family: 'Manrope', sans-serif; font-size: 21px; font-weight: 750; line-height: 1.4; letter-spacing: -.035em; color: #edf3ff; overflow-wrap: anywhere; }
+.hub-card-description { color: #96a7c3; font-size: 14px; line-height: 1.65; font-weight: 400; overflow-wrap: anywhere; }
+.hub-card-arrow { display: flex; align-items: center; justify-content: center; margin-left: auto; width: 17px; height: 17px; color: #607fa9; flex: none; transition: transform .2s ease, color .2s ease; }
+.hub-card-arrow svg { width: 17px; height: 17px; }
 .hub-card:hover .hub-card-arrow { color: #9dc3ff; transform: translateX(3px); }
 .hub-card-products { background: linear-gradient(105deg, #1b2230 0%, #131e30 100%); border-color: #756a3c88; }
 .hub-card-products .hub-card-icon { background: #3b3420; border-color: #695b2f66; color: var(--brand-accent); }
@@ -285,6 +286,50 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 @keyframes modal-enter { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes drawer-enter { from { opacity: 0; transform: translateX(25px); } to { opacity: 1; transform: translateX(0); } }
 
+@media (min-width: 541px) and (max-width: 900px) {
+  .hub-brand { height: 260px; }
+  .brand-artwork { inset: 28px 30px 64px; }
+  .brand-logo { width: min(100%, 240px); }
+  .brand-topline { top: 20px; left: 28px; right: 28px; font-size: 11px; }
+  .hub-navigation-wrap { padding: 28px 28px 30px; }
+  .hub-panel-title, .identity-name { font-size: 34px; }
+  .hub-card { min-height: 102px; padding: 19px; gap: 17px; }
+  .hub-card-title { font-size: 22px; }
+  .hub-card-description { font-size: 15px; }
+  .hub-card-icon { width: 54px; height: 54px; }
+  .hub-card-count { font-size: 12px; }
+}
+
+@media (min-width: 901px) {
+  .hub-layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(390px, 1fr); }
+  .hub-brand { min-height: 100%; height: auto; }
+  .brand-artwork { inset: 85px 50px 120px; }
+  .brand-logo { width: min(100%, 490px); }
+  .brand-topline { top: 30px; left: 36px; right: 30px; gap: 11px; font-size: 12px; letter-spacing: .12em; }
+  .brand-topline > svg, .brand-mark { width: 26px; height: 26px; }
+  .brand-fallback { gap: 15px; padding: 70px 28px 90px; }
+  .brand-fallback strong { font-size: clamp(30px, 4vw, 57px); }
+  .brand-monogram { width: 112px; height: 112px; border-radius: 24px; font-size: 40px; }
+  .brand-caption { left: 24px; right: 24px; bottom: 38px; }
+  .brand-caption p { margin-bottom: 5px; font-size: 15px; }
+  .brand-caption span { font-size: 13px; }
+  .hub-navigation-wrap { padding: 66px clamp(28px, 3.1vw, 65px) 25px; border-left: 1px solid #1c2b443d; }
+  .hub-navigation-wrap > .hub-identity, .hub-navigation, .hub-navigation-wrap > .site-footer, .hub-navigation-wrap > .owner-tools { width: auto; max-width: none; margin-left: 0; margin-right: 0; }
+  .hub-identity { margin-bottom: 27px; }
+  .hub-panel-eyebrow, .identity-eyebrow { margin-bottom: 12px; font-size: 11px; letter-spacing: .16em; }
+  .hub-panel-title, .identity-name { font-size: clamp(29px, 2.2vw, 40px); line-height: 1.24; margin-bottom: 13px; }
+  .hub-panel-description, .identity-description { line-height: 1.75; }
+  .hub-navigation { gap: 12px; }
+  .hub-card { min-height: 105px; padding: 19px 18px; gap: 17px; border-radius: 12px; }
+  .hub-card-icon { width: 53px; height: 53px; border-radius: 11px; }
+  .hub-card-icon svg { width: 27px; height: 27px; }
+  svg.hub-card-icon { padding: 13px; }
+  .hub-card-title { font-size: 22px; line-height: 1.35; }
+  .hub-card-description { line-height: 1.6; }
+  .hub-card-arrow { width: 21px; height: 21px; }
+  .hub-card-arrow svg { width: 20px; height: 20px; }
+}
+
 @media (min-width: 1700px) {
   .hub-layout { grid-template-columns: minmax(0, 1.9fr) minmax(450px, 1fr); }
   .hub-navigation-wrap { padding: 80px 53px 35px; }
@@ -314,24 +359,6 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 }
 
 @media (max-width: 900px) {
-  .hub-layout { display: block; min-height: 100dvh; }
-  .hub-brand { min-height: 0; height: 400px; }
-  .brand-artwork { inset: 50px 30px 90px; }
-  .brand-logo { width: min(100%, 300px); }
-  .brand-topline { top: 24px; left: 27px; right: 27px; font-size: 11px; }
-  .brand-caption { bottom: 20px; }
-  .brand-caption p { font-size: 14px; }
-  .brand-caption span { font-size: 12px; }
-  .hub-navigation-wrap { padding: 36px 35px 30px; border: 0; min-height: 0; }
-  .hub-navigation-wrap > .hub-identity, .hub-navigation, .hub-navigation-wrap > .site-footer, .hub-navigation-wrap > .owner-tools { width: 100%; max-width: 520px; margin-left: auto; margin-right: auto; }
-  .hub-identity { margin-bottom: 27px; }
-  .hub-panel-title, .identity-name { font-size: 34px; max-width: 460px; }
-  .hub-panel-description, .identity-description { font-size: 16px; max-width: 460px; }
-  .hub-card { min-height: 106px; gap: 18px; padding: 20px; }
-  .hub-card-title { font-size: 23px; }
-  .hub-card-description { font-size: 15px; }
-  .hub-card-icon { width: 54px; height: 54px; }
-  .hub-card-count { font-size: 12px; }
   .site-footer { font-size: 12px; }
   .site-footer strong { font-size: 13px; }
   .site-shell.showing-products { padding: 33px 28px 40px; }
@@ -345,29 +372,7 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 }
 
 @media (max-width: 540px) {
-  .hub-brand { height: 360px; }
-  .brand-artwork { inset: 48px 30px 78px; }
-  .brand-logo { width: min(100%, 260px); }
-  .brand-topline { top: 21px; left: 23px; right: 23px; gap: 9px; font-size: 10px; letter-spacing: .1em; }
-  .brand-topline > svg, .brand-mark { width: 23px; height: 23px; }
-  .brand-caption { left: 18px; right: 18px; bottom: 17px; }
-  .brand-caption p { font-size: 12px; margin-bottom: 2px; }
-  .brand-caption span { font-size: 11px; }
-  .hub-navigation-wrap { padding: 30px 23px 26px; }
-  .hub-identity { margin-bottom: 24px; }
-  .hub-panel-eyebrow, .identity-eyebrow { font-size: 10px; margin-bottom: 10px; letter-spacing: .13em; }
-  .hub-panel-title, .identity-name { font-size: 31px; line-height: 1.25; margin-bottom: 12px; }
-  .hub-panel-description, .identity-description { font-size: 16px; line-height: 1.75; }
-  .hub-navigation { gap: 11px; }
-  .hub-card { min-height: 103px; padding: 17px 15px; gap: 13px; border-radius: 11px; }
-  .hub-card-title { font-size: 21px; line-height: 1.4; }
-  .hub-card-description { font-size: 14px; line-height: 1.65; }
-  .hub-card-icon { width: 48px; height: 48px; border-radius: 10px; }
-  .hub-card-icon svg { width: 25px; height: 25px; }
-  svg.hub-card-icon { padding: 11px; }
-  .hub-card-arrow { width: 17px; height: 17px; }
-  .hub-card-arrow svg { width: 17px; height: 17px; }
-  .hub-card-count { font-size: 11px; }
+  .brand-caption span { display: none; }
   .site-footer { gap: 7px; padding-top: 23px; font-size: 11px; }
   .site-footer strong { font-size: 12px; }
   .owner-tools { padding-top: 12px; }
@@ -416,17 +421,14 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 }
 
 @media (max-width: 359px) {
-  .hub-brand { height: 330px; }
+  .hub-brand { height: 220px; }
   .brand-topline { left: 18px; right: 18px; top: 19px; font-size: 9px; }
-  .hub-navigation-wrap { padding: 27px 18px 23px; }
+  .hub-navigation-wrap { padding: 24px 18px 26px; }
   .hub-panel-title, .identity-name { font-size: 29px; }
-  .hub-panel-description, .identity-description { font-size: 15px; }
   .hub-card { padding: 16px 12px; gap: 11px; }
   .hub-card-icon { width: 44px; height: 44px; }
   .hub-card-icon svg { width: 23px; height: 23px; }
   svg.hub-card-icon { padding: 10px; }
-  .hub-card-title { font-size: 20px; }
-  .hub-card-description { font-size: 14px; }
   .hub-card-arrow { width: 15px; height: 15px; }
   .hub-card-arrow svg { width: 15px; height: 15px; }
   .site-footer { font-size: 10px; gap: 6px; }

@@ -14,7 +14,7 @@ O estado é local ao navegador. Não há API, autenticação, cadastro centraliz
 
 Os controles Personalizar página e Compartilhar página ficam disponíveis somente na prévia de desenvolvimento, fora do modo público. Eles não aparecem no site publicado nem na prévia de produção, seja na página inicial ou no catálogo.
 
-Para visualizar o host em tamanho de celular mesmo em uma aba larga, adicione `?preview=mobile` ao endereço. A Prévia para celular enquadra o mesmo aplicativo em um iframe de mesma origem com área de 390 × 844 pixels ou menor em telas estreitas, sem duplicar o front. Não é emulação de aparelho. O link Abrir site normal retorna na mesma aba, preservando os demais parâmetros e o fragmento da URL.
+O endereço principal `/` se adapta automaticamente à largura disponível. No celular, a identidade é compacta e os quatro atalhos ficam grandes, em uma coluna, com rolagem natural. A partir de 901 pixels, o computador usa identidade e atalhos lado a lado. Não há iframe, moldura de aparelho, detecção por `userAgent` ou link exclusivo para celular. Links antigos com `?preview=mobile` continuam funcionando e abrem o mesmo aplicativo; o parâmetro é ignorado, preservando os demais parâmetros e o fragmento da URL.
 
 ## Documentação
 
@@ -30,6 +30,5 @@ Para visualizar o host em tamanho de celular mesmo em uma aba larga, adicione `?
 - [Aplicação React](front/src/App.jsx)
 - [Comandos](package.json)
 - [Configuração do Site](.openai/hosting.json)
-- [Entrada e seleção da prévia](front/src/index.jsx)
-- [Prévia para celular](front/src/components/MobilePreview.jsx)
-- [Estilos da prévia](front/src/styles/mobilePreview.css)
+- [Entrada da aplicação](front/src/index.jsx)
+- [Estilos responsivos](front/src/styles/global.css)
