@@ -212,11 +212,13 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
 .editor-divider { height: 1px; background: #263a57; margin: 28px 0; }
 .color-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-bottom: 24px; }
 .color-option { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; min-width: 0; padding: 14px; border: 1px solid #2d4566; background: #101f35; border-radius: 10px; cursor: pointer; }
-.color-option input { appearance: none; -webkit-appearance: none; width: 47px; height: 47px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: none; cursor: pointer; margin-bottom: 2px; }
+.color-option input[type='color'] { appearance: none; -webkit-appearance: none; width: 47px; height: 47px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: none; cursor: pointer; margin-bottom: 2px; }
 .color-option input::-webkit-color-swatch-wrapper { padding: 0; }
 .color-option input::-webkit-color-swatch { border: 0; border-radius: 8px; }
 .color-option strong { font-size: 13px; font-weight: 600; line-height: 1.5; color: #bfd2ee; }
 .color-option small { font-size: 11px; line-height: 1.6; color: #89a0c1; overflow-wrap: anywhere; }
+.color-option > label { margin: 0; }
+.color-option .color-hex { width: 100%; min-width: 0; min-height: 44px; padding: 8px; border: 1px solid #345273; border-radius: 7px; background: #0a172a; color: #dceaff; font: 16px 'DM Sans', sans-serif; }
 .checkbox-field { display: flex; align-items: center; gap: 11px; min-height: 48px; color: #b2c4df; font-size: 14px; line-height: 1.7; cursor: pointer; }
 .checkbox-field input { width: 21px; height: 21px; accent-color: var(--brand-primary); flex: none; }
 .drawer-demo-note { display: flex; align-items: flex-start; gap: 10px; padding: 15px; border: 1px solid #263d5b; border-radius: 9px; background: #101f36; margin-top: 27px; color: #8aa5c9; }
@@ -411,7 +413,7 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
   .form-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .color-grid { gap: 7px; }
   .color-option { padding: 12px 8px; gap: 8px; }
-  .color-option input { width: 43px; height: 43px; }
+  .color-option input[type='color'] { width: 43px; height: 43px; }
   .color-option strong { font-size: 12px; }
   .color-option small { font-size: 11px; }
   .drawer-footer { padding: 16px 21px calc(20px + env(safe-area-inset-bottom, 0px)); }
@@ -445,7 +447,8 @@ dialog::backdrop { background: #020715b8; backdrop-filter: blur(9px); }
   .product-description { font-size: 15px; }
   .color-grid { grid-template-columns: minmax(0, 1fr); }
   .color-option { display: grid; grid-template-columns: 48px minmax(0, 1fr); padding: 12px; align-items: center; }
-  .color-option input { grid-row: 1 / 3; width: 44px; height: 44px; margin: 0; }
+  .color-option input[type='color'] { grid-row: 1 / 3; width: 44px; height: 44px; margin: 0; }
+  .color-option .color-hex { grid-column: 1 / -1; }
   .color-option strong { font-size: 14px; }
   .color-option small { font-size: 12px; }
   .drawer-header { padding-left: 18px; padding-right: 18px; }

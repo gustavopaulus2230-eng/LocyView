@@ -1,6 +1,6 @@
 export const STORAGE_KEY = 'locytech-hub:v3';
 export const LEGACY_STORAGE_KEY = 'locytech-catalog:v2';
-export const DEFAULT_LOGO = './assets/locytech-hd.png';
+export const DEFAULT_LOGO = '/assets/locytech-hd.png';
 export const MAX_LOGO_BYTES = 1.5 * 1024 * 1024;
 export const PRODUCT_ICONS = ['window', 'globe', 'store', 'briefcase', 'links'];
 
@@ -46,7 +46,7 @@ export function contrastText(hex) {
 }
 
 export function safeLogo(value) {
-  if (value === DEFAULT_LOGO || value === './assets/locytech.png') return DEFAULT_LOGO;
+  if ([DEFAULT_LOGO, './assets/locytech-hd.png', './assets/locytech.png', '/assets/locytech.png'].includes(value)) return DEFAULT_LOGO;
   return /^data:image\/(?:png|jpeg|webp);base64,[a-z\d+/=]+$/i.test(value || '') && value.length < 3 * 1024 * 1024 ? value : '';
 }
 
@@ -102,17 +102,17 @@ const previousSocialUrls = {
   whatsapp: 'https://www.whatsapp.com/'
 };
 
-export function normalize(source) {
+export function normalize(source, { migrateDefaults = true } = {}) {
   source = source && typeof source === 'object' ? source : {};
   const oldPalettes = [
     ['#2471e8', '#f4cf54', '#f2f7fd'],
     ['#1453d6', '#ffcf24', '#e9f0fd'],
     ['#265dc6', '#f1d36a', '#f6f8fc']
   ];
-  const previousDefaultPalette = oldPalettes.some(([primary, accent, background]) =>
+  const previousDefaultPalette = migrateDefaults && oldPalettes.some(([primary, accent, background]) =>
     String(source.primaryColor || '').toLowerCase() === primary && String(source.accentColor || '').toLowerCase() === accent && String(source.backgroundColor || '').toLowerCase() === background);
   const palette = previousDefaultPalette ? defaults : source;
-  const legacy = source.version !== 3;
+  const legacy = migrateDefaults && source.version !== 3;
   const oldDescriptions = [
     'Sua marca merece um lugar de destaque na internet.\nEscolha a solução para o seu próximo passo.',
     'Conecte-se com a gente e encontre a solução certa para o seu negócio.'
@@ -122,8 +122,8 @@ export function normalize(source) {
   return {
     version: 3,
     name: text(source.name, defaults.name, 60),
-    eyebrow: oldEyebrows.includes(source.eyebrow) ? defaults.eyebrow : text(source.eyebrow, defaults.eyebrow, 70),
-    description: oldDescriptions.includes(source.description) ? defaults.description : text(source.description, defaults.description, 240),
+    eyebrow: migrateDefaults && oldEyebrows.includes(source.eyebrow) ? defaults.eyebrow : text(source.eyebrow, defaults.eyebrow, 70),
+    description: migrateDefaults && oldDescriptions.includes(source.description) ? defaults.description : text(source.description, defaults.description, 240),
     slug: text(source.slug, defaults.slug, 50),
     logo: source.logo === '' ? '' : safeLogo(source.logo) || DEFAULT_LOGO,
     primaryColor: color(palette.primaryColor, defaults.primaryColor),
@@ -137,7 +137,7 @@ export function normalize(source) {
       usedIds.add(id);
       const productKey = String(product.title || '').trim().toLocaleLowerCase('pt-BR');
       const previousProduct = defaults.products.find(item => item.title.toLocaleLowerCase('pt-BR') === productKey);
-      const previousCopy = Object.hasOwn(previousProductCopy, productKey) ? previousProductCopy[productKey] : null;
+      const previousCopy = migrateDefaults && Object.hasOwn(previousProductCopy, productKey) ? previousProductCopy[productKey] : null;
       return {
         id,
         icon: PRODUCT_ICONS.includes(product.icon) ? product.icon : 'window',
@@ -145,7 +145,7 @@ export function normalize(source) {
         title: text(product.title, 'Novo produto', 70),
         description: previousCopy && product.description === previousCopy.description ? previousProduct.description : text(product.description, '', 240),
         note: previousCopy && product.note === previousCopy.note ? previousProduct.note : text(product.note, '', 80),
-        price: previousProduct && ((legacy && /^sob consulta$/i.test(String(product.price || '').trim())) || String(product.price || '').trim() === previousProductPrices.get(productKey)) ? previousProduct.price : text(product.price, 'Sob consulta', 40) || 'Sob consulta',
+        price: migrateDefaults && previousProduct && ((legacy && /^sob consulta$/i.test(String(product.price || '').trim())) || String(product.price || '').trim() === previousProductPrices.get(productKey)) ? previousProduct.price : text(product.price, 'Sob consulta', 40) || 'Sob consulta',
         features: (Array.isArray(product.features) ? product.features : []).filter(item => typeof item === 'string').slice(0, 8).map(item => {
           const previousIndex = previousCopy?.features.indexOf(item) ?? -1;
           return previousIndex >= 0 ? previousProduct.features[previousIndex] : item.slice(0, 130);
@@ -156,7 +156,7 @@ export function normalize(source) {
     links: socialDefaults.map(defaultLink => {
       const existing = Array.isArray(source.links) ? source.links.find(link => link?.platform === defaultLink.platform) : null;
       const existingUrl = existing ? text(existing.url, '', 2048) : defaultLink.url;
-      const previousUrl = previousSocialUrls[defaultLink.platform];
+      const previousUrl = migrateDefaults ? previousSocialUrls[defaultLink.platform] : null;
       const url = previousUrl && existingUrl.trim().replace(/\/$/, '').toLowerCase() === previousUrl.replace(/\/$/, '').toLowerCase() ? defaultLink.url : existingUrl;
       return { id: defaultLink.platform, platform: defaultLink.platform, title: defaultLink.title, url: legacy && !url.trim() ? defaultLink.url : url, enabled: true };
     })
@@ -173,6 +173,7 @@ export function encodeSnapshot(snapshot) {
 export function publicSnapshot(state) {
   return {
     version: 3,
+    preserveConfiguredValues: true,
     name: state.name,
     eyebrow: state.eyebrow,
     description: state.description,
@@ -199,7 +200,7 @@ export function decodeSnapshot(encoded) {
   const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
   const result = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
   if (!result || typeof result !== 'object' || !Array.isArray(result.products) || !Array.isArray(result.links)) throw new Error('Página inválida');
-  return normalize(result);
+  return normalize(result, { migrateDefaults: result.preserveConfiguredValues !== true });
 }
 
 export function loadPageState() {

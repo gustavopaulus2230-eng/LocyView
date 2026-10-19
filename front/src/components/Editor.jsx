@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Icon from './Icon';
 import Modal from './Modal';
-import { categoryName, cleanSlug, MAX_LOGO_BYTES, optimizeLogo, PRODUCT_ICONS, safeLogo, uid } from '../utils/pageState';
+import { BrandFields, ColorsFields, LinkFields } from './PageFields';
+import { categoryName, PRODUCT_ICONS, uid } from '../utils/pageState';
 
 const editorTabs = [['brand', 'Identidade'], ['products', 'Produtos'], ['links', 'Links e contatos']];
 
@@ -11,9 +12,6 @@ function ActionButton({ label, icon, disabled, onClick }) {
 
 export default function Editor({ state, activeTab, onTab, onChange, onClose, onSave, onShare, onEditProduct, onProductAction, status, toast }) {
   const tabsRef = useRef({});
-  const logoVersion = useRef(0);
-  const logoInput = useRef(null);
-  const [uploading, setUploading] = useState(false);
 
   function handleTabKey(event, current) {
     const index = editorTabs.findIndex(([key]) => key === current);
@@ -25,53 +23,15 @@ export default function Editor({ state, activeTab, onTab, onChange, onClose, onS
     tabsRef.current[tab]?.focus();
   }
 
-  function uploadLogo(event) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const version = ++logoVersion.current;
-    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) { event.target.value = ''; toast('Escolha uma imagem PNG, JPG ou WebP.'); return; }
-    if (file.size > MAX_LOGO_BYTES) { event.target.value = ''; toast('Escolha uma imagem de até 1,5 MB.'); return; }
-    setUploading(true);
-    const reader = new FileReader();
-    reader.onload = async () => {
-      try {
-        const source = safeLogo(reader.result);
-        if (!source) throw new Error('Arquivo inválido');
-        const optimized = await optimizeLogo(source);
-        if (version !== logoVersion.current) return;
-        onChange({ logo: optimized });
-        toast('Logo atualizada.');
-      } catch {
-        if (version !== logoVersion.current) return;
-        if (logoInput.current) logoInput.current.value = '';
-        toast('Não foi possível abrir essa imagem. Tente outro arquivo.');
-      } finally { if (version === logoVersion.current) setUploading(false); }
-    };
-    reader.onerror = () => { if (version === logoVersion.current) { setUploading(false); toast('Não foi possível ler a imagem.'); } };
-    reader.readAsDataURL(file);
-  }
-
-  function removeLogo() {
-    logoVersion.current += 1;
-    setUploading(false);
-    if (logoInput.current) logoInput.current.value = '';
-    onChange({ logo: '' });
-  }
-
   return <Modal id="editor-dialog" className="editor-drawer" labelledBy="editor-heading" onClose={onClose}>
     <header className="drawer-header"><div><span className="drawer-eyebrow">LOCYTECH</span><h2 id="editor-heading">Personalizar página<span>.</span></h2><p>Edite a marca, os produtos e os links.</p></div><button type="button" id="editor-close" className="icon-button" aria-label="Fechar personalização" onClick={onClose}><Icon name="close" /></button></header>
     <div className="drawer-tabs" role="tablist" aria-label="Personalização">{editorTabs.map(([key, label]) => <button type="button" key={key} ref={element => { tabsRef.current[key] = element; }} role="tab" id={`editor-tab-${key}`} data-editor-tab={key} className={activeTab === key ? 'active is-active' : ''} aria-selected={activeTab === key} aria-controls={`editor-panel-${key}`} tabIndex={activeTab === key ? 0 : -1} onClick={() => onTab(key)} onKeyDown={event => handleTabKey(event, key)}>{label}</button>)}</div>
     <div className="drawer-body">
       <section id="editor-panel-brand" role="tabpanel" aria-labelledby="editor-tab-brand" hidden={activeTab !== 'brand'}>
         <div className="editor-section-heading"><h3>Identidade da marca</h3><p>As alterações aparecem na prévia da página.</p></div>
-        <span className="field-label">Logo da marca</span><div className="logo-upload">{state.logo ? <img id="logo-preview" src={state.logo} alt="Logo atual" /> : <span className="logo-placeholder"><Icon name="brand" size={32} /></span>}<div><label className={`button button-secondary button-small${uploading ? ' is-loading' : ''}`} htmlFor="brand-logo"><Icon name="upload" />{uploading ? 'Processando imagem…' : 'Alterar logo'}</label><button type="button" id="remove-logo" className="text-button" disabled={!state.logo && !uploading} onClick={removeLogo}>Remover</button><p>PNG, JPG ou WebP · até 1,5 MB</p></div><input ref={logoInput} id="brand-logo" className="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Enviar logo" onChange={uploadLogo} disabled={uploading} /></div>
-        <div className="field"><label htmlFor="brand-name">Nome da marca <span>*</span></label><input id="brand-name" value={state.name} maxLength={60} required placeholder="Nome da marca" onChange={event => onChange({ name: event.target.value })} /></div>
-        <div className="field"><label htmlFor="brand-eyebrow">Texto acima do nome</label><input id="brand-eyebrow" value={state.eyebrow} maxLength={70} placeholder="Ex.: Canais e produtos" onChange={event => onChange({ eyebrow: event.target.value })} /></div>
-        <div className="field"><label htmlFor="brand-description">Apresentação</label><textarea id="brand-description" rows={3} value={state.description} maxLength={240} placeholder="Descreva sua marca" onChange={event => onChange({ description: event.target.value })} /></div>
-        <div className="field"><label htmlFor="page-slug">Identificador da página</label><div className="input-prefix"><span>/</span><input id="page-slug" value={state.slug} maxLength={50} placeholder="sua-marca" onChange={event => onChange({ slug: event.target.value })} onBlur={event => { const slug = cleanSlug(event.target.value); if (slug !== state.slug) onChange({ slug }); }} /></div><small>Use letras, números e hífens. O identificador não cria uma rota nesta demonstração.</small></div>
+        <BrandFields state={state} onChange={onChange} toast={toast} />
         <div className="editor-divider" /><div className="editor-section-heading"><h3>Cores da página</h3><p>Escolha as cores principal, de destaque e de fundo.</p></div>
-        <div className="color-grid">{[['primaryColor', 'primary-color', 'Principal', 'Botões e detalhes'], ['accentColor', 'accent-color', 'Destaque', 'Produtos e marca'], ['backgroundColor', 'background-color', 'Fundo', 'Fundo da página']].map(([key, id, label, hint]) => <label key={key} htmlFor={id} className="color-option"><input id={id} type="color" value={state[key]} onChange={event => onChange({ [key]: event.target.value })} /><strong>{label}</strong><small>{hint}</small></label>)}</div>
-        <label className="checkbox-field"><input id="brand-footer-checkbox" type="checkbox" checked={state.showBrand} onChange={event => onChange({ showBrand: event.target.checked })} /><span>Mostrar assinatura LocyTech no rodapé</span></label>
+        <ColorsFields state={state} onChange={onChange} />
       </section>
       <section id="editor-panel-products" role="tabpanel" aria-labelledby="editor-tab-products" hidden={activeTab !== 'products'}>
         <div className="editor-section-heading"><h3>Produtos do catálogo</h3><p>Cadastre landing pages, sites e produtos digitais.</p></div>
@@ -82,8 +42,7 @@ export default function Editor({ state, activeTab, onTab, onChange, onClose, onS
       </section>
       <section id="editor-panel-links" role="tabpanel" aria-labelledby="editor-tab-links" hidden={activeTab !== 'links'}>
         <div className="editor-section-heading"><h3>Links dos canais</h3><p>Configure Instagram, WhatsApp e LinkedIn. Nossos produtos abre o catálogo.</p></div>
-        <div className="editor-note"><Icon name="info" /><span>Instagram e WhatsApp já estão configurados. O link do LinkedIn ainda é um exemplo; substitua pelo perfil da empresa.</span></div>
-        <div id="contact-links-list" className="editor-contact-list">{state.links.map(link => <article key={link.id} className="editor-contact" data-contact-id={link.id}><div className="editor-contact-head"><div className="editor-contact-title"><Icon name={link.platform} size={20} /><strong>{link.title}</strong></div></div><div className="editor-contact-fields"><div className="field"><label htmlFor={`contact-${link.id}-url`}>Link de destino</label><input id={`contact-${link.id}-url`} type="text" inputMode="url" value={link.url} maxLength={2048} placeholder="https://..." onChange={event => onChange({ links: state.links.map(item => item.id === link.id ? { ...item, url: event.target.value } : item) })} /></div></div></article>)}</div>
+        <LinkFields state={state} onChange={onChange} showDefaultNote />
       </section>
       <div className="drawer-demo-note"><Icon name="info" /><p>Demonstração apenas de front-end. O rascunho é salvo neste navegador. O cadastro centralizado depende da integração com a LocyTech.</p></div>
     </div>
