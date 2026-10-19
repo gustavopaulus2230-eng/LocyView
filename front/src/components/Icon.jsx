@@ -1,12 +1,6 @@
 import React from 'react';
 
 const paths = {
-  dashboard: <><rect x="3" y="3" width="7" height="7" rx="2" /><rect x="14" y="3" width="7" height="7" rx="2" /><rect x="3" y="14" width="7" height="7" rx="2" /><rect x="14" y="14" width="7" height="7" rx="2" /></>,
-  users: <><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2" /></>,
-  search: <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></>,
-  save: <><path d="M20 21H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h13l4 4v13a1 1 0 0 1-1 1Z" /><path d="M7 3v6h9V3M7 21v-8h10v8" /></>,
-  palette: <><path d="M12 3a9 9 0 1 0 0 18h2a2 2 0 0 0 1-3.7 1.7 1.7 0 0 1 1-3.3h2a3 3 0 0 0 3-3c0-4.4-4-8-9-8Z" /><path d="M7 11h.01M9 7h.01M14 6h.01M18 9h.01" /></>,
-  phone: <><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M10 5h4m-2 14h.01" /></>,
   window: <><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M3 9h18M7 6.5h.01m3 0h.01M7 13h5m-5 3h9" /></>,
   globe: <><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18M5 7h14M5 17h14" /></>,
   store: <path d="M4 10v11h16V10M3 7l2-4h14l2 4v3a3 3 0 0 1-4 0 3 3 0 0 1-5 0 3 3 0 0 1-5 0 3 3 0 0 1-4 0V7Zm0 0h18M9 21v-7h6v7" />,
